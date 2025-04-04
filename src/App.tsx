@@ -9,7 +9,6 @@ function App() {
       <BrowserRouter>
           <Routes>
               <Route path="/register" element={<Register />} />
-                <Route path="/" element={<App/>} />
           </Routes>
       </BrowserRouter>
   );
