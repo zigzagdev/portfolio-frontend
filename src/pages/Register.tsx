@@ -3,7 +3,7 @@ import React from 'react';
 const Register = () => {
     return (
         <div>
-            <h1>Register Pages</h1>
+            <h1>Register Page</h1>
         </div>
     );
 };
