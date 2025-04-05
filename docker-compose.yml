@@ -1,15 +1,16 @@
 version: "3.8"
+
 services:
   frontend:
     build:
       context: .
-      dockerfile: dev.Dockerfile
-    container_name: react-frontend
-    restart: always
+      dockerfile: Dockerfile
+    container_name: vite-react-app
     ports:
-      - "6987:3000"
+      - "6673:5173"
     volumes:
       - .:/app
       - /app/node_modules
     stdin_open: true
     tty: true
+    command: npm run dev
