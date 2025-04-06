@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegistrationFormValues, registrationSchema } from '../../hooks/RegisterValidation';
@@ -6,6 +6,7 @@ import TextInput from '../ui/TextInput';
 import EmailInput from '../ui/EmailInput';
 import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
+import { registerUser } from '../../lib/register';
 
 const RegistrationForm: React.FC = () => {
     const {
@@ -16,8 +17,26 @@ const RegistrationForm: React.FC = () => {
         resolver: zodResolver(registrationSchema),
     });
 
-    const onSubmit = (data: RegistrationFormValues) => {
-        console.log('✅ Submit:', data);
+    const [loading, setLoading] = useState(false);
+    const [successMsg, setSuccessMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const onSubmit = async (data: RegistrationFormValues) => {
+        setLoading(true);
+        setSuccessMsg('');
+        setErrorMsg('');
+
+        try {
+            const res = await registerUser(data);
+            setSuccessMsg('Registration successful!');
+            console.log('✅ Server response:', res);
+        } catch (err: any) {
+            const msg =
+                err.response?.data?.message || 'Registration failed. Please try again.';
+            setErrorMsg(msg);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -57,9 +76,12 @@ const RegistrationForm: React.FC = () => {
                 className="w-full"
             />
 
-            <Button type="submit" className="w-full mt-4">
-                Register
+            <Button type="submit" className="w-full mt-4" disabled={loading}>
+                {loading ? 'Submitting...' : 'Register'}
             </Button>
+
+            {successMsg && <p className="text-green-600">{successMsg}</p>}
+            {errorMsg && <p className="text-red-600">{errorMsg}</p>}
         </form>
     );
 };
