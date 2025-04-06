@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import logo from './assets/react.svg'; // 仮ロゴ（あとで差し替え可）
+import logo from './assets/react.svg';
 
 const App: React.FC = () => {
     return (
