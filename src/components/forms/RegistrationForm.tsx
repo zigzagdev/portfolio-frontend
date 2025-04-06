@@ -8,6 +8,7 @@ import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
 import { registerUser } from '../../lib/register';
 import { messages } from '../../lib/messages';
+import Spinner from '../ui/Spinner';
 
 const RegistrationForm: React.FC = () => {
     const {
@@ -77,7 +78,13 @@ const RegistrationForm: React.FC = () => {
             />
 
             <Button type="submit" className="w-full mt-4" disabled={loading}>
-                {loading ? 'Submitting...' : 'Register'}
+                {loading ? (
+                    <div className="flex items-center justify-center gap-2">
+                        <Spinner size="sm" /> Submitting...
+                    </div>
+                ) : (
+                    'Register'
+                )}
             </Button>
 
             {successMsg && <p className="text-green-600">{successMsg}</p>}

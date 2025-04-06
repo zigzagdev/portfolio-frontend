@@ -5,4 +5,5 @@ export type ButtonProps = {
     disabled?: boolean;
     className?: string;
     value?: string;
+    loading?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
