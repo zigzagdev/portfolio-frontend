@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export type RegisterFormInput = {
     email: string;
     password: string;
