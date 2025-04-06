@@ -7,6 +7,7 @@ import EmailInput from '../ui/EmailInput';
 import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
 import { registerUser } from '../../lib/register';
+import { messages } from '../../lib/messages';
 
 const RegistrationForm: React.FC = () => {
     const {
@@ -28,11 +29,10 @@ const RegistrationForm: React.FC = () => {
 
         try {
             const res = await registerUser(data);
-            setSuccessMsg('Registration successful!');
-            console.log('✅ Server response:', res);
+            setSuccessMsg(messages.success.registration);
         } catch (err: any) {
             const msg =
-                err.response?.data?.message || 'Registration failed. Please try again.';
+                err.response?.data?.message || setErrorMsg(messages.error.registration);
             setErrorMsg(msg);
         } finally {
             setLoading(false);
