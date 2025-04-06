@@ -1,50 +1,50 @@
 import React, { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { PasswordInputProps } from './PasswordInput.types';
 
-const PasswordInput: React.FC<PasswordInputProps> = (
-    {
-        label,
-        name,
-        value,
-        onChange,
-        placeholder,
-        error,
-        required = false,
+const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
+    (
+        {
+            label,
+            error,
+            required = false,
+            className = '',
+            ...inputProps
+        },
+        ref
+    ) => {
+        const [showPassword, setShowPassword] = useState(false);
 
-    }) => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    return (
-        <div className="mb-4">
-            {label && (
-                <label htmlFor={name} className="block mb-1 text-sm font-medium text-gray-700">
-                    {label}{required && <span className="text-red-500 ml-1">*</span>}
-                </label>
-            )}
-            <div className="relative">
-                <input
-                    id={name}
-                    name={name}
-                    type={showPassword ? 'text' : 'password'}
-                    value={value}
-                    onChange={onChange}
-                    placeholder={placeholder}
-                    required={required}
-                    className={`w-full px-3 py-2 border rounded-md shadow-sm pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                        error ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                />
-                <button
-                    type="button"
-                    className="absolute inset-y-0 right-2 text-sm text-gray-600"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                >
-                    {showPassword ? 'Hide' : 'Show'}
-                </button>
+        return (
+            <div className="flex flex-col gap-1">
+                {label && (
+                    <label htmlFor={inputProps.name} className="text-sm font-medium text-gray-700">
+                        {label}
+                        {required && <span className="text-red-500 ml-1">*</span>}
+                    </label>
+                )}
+                <div className="relative">
+                    <input
+                        ref={ref}
+                        {...inputProps}
+                        type={showPassword ? 'text' : 'password'}
+                        className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                            error ? 'border-red-500' : 'border-gray-300'
+                        } ${className}`}
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute inset-y-0 right-3 flex items-center text-gray-600 hover:text-gray-800 focus:outline-none"
+                        tabIndex={-1}
+                    >
+                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                </div>
+                {error && <p className="text-sm text-red-600">{error}</p>}
             </div>
-            {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
-        </div>
-    );
-};
+        );
+    }
+);
 
 export default PasswordInput;

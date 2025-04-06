@@ -4,4 +4,5 @@ export type ButtonProps = {
     type?: 'button' | 'submit' | 'reset';
     disabled?: boolean;
     className?: string;
-};
+    value?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
