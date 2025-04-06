@@ -74,21 +74,32 @@ const RegistrationForm: React.FC = () => {
                 {...register('password')}
                 placeholder="Minimum 6 characters"
                 error={errors.password?.message}
-                className="w-full"
+                className="w-full mb-5"
             />
 
-            <Button type="submit" className="w-full mt-4" disabled={loading}>
-                {loading ? (
-                    <div className="flex items-center justify-center gap-2">
-                        <Spinner size="sm" /> Submitting...
-                    </div>
-                ) : (
-                    'Register'
-                )}
-            </Button>
+            <div className="mt-10 mb-6">
+                <Button type="submit" className="w-full" disabled={loading}>
+                    {loading ? (
+                        <div className="flex items-center justify-center gap-2">
+                            <Spinner size="sm" /> Submitting...
+                        </div>
+                    ) : (
+                        'Register'
+                    )}
+                </Button>
+            </div>
 
-            {successMsg && <p className="text-green-600">{successMsg}</p>}
-            {errorMsg && <p className="text-red-600">{errorMsg}</p>}
+            {successMsg && (
+                <p className="text-sm text-green-600 font-medium bg-green-100 p-2 rounded">
+                    {successMsg}
+                </p>
+            )}
+            {errorMsg && (
+                <p className="text-sm text-red-600 font-medium bg-red-100 p-2 rounded">
+                    {errorMsg}
+                </p>
+            )}
+
         </form>
     );
 };
