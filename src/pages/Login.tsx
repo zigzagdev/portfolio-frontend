@@ -1,5 +1,6 @@
 import React from "react";
 import LoginForm from "../components/forms/LoginForm";
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
     return (
@@ -14,9 +15,9 @@ const Login: React.FC = () => {
                 <LoginForm />
                 <p className="text-sm text-center text-gray-500 mt-2 pt-8">
                     Don't have an account?{" "}
-                    <a href="/register" className="text-indigo-600 hover:underline">
+                    <Link to="/register" className="text-indigo-600 hover:underline">
                         Sign up
-                    </a>
+                    </Link>
                 </p>
             </section>
         </main>
