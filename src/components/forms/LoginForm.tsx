@@ -27,12 +27,12 @@ const LoginForm: React.FC = () => {
         setSuccessMsg('');
         setErrorMsg('');
 
+        // need to add account lock logic here.
         try {
             const res = await loginUser(data);
             setSuccessMsg(messages.success.login);
         } catch (err: any) {
-            const msg = err.response?.data?.message || messages.error.login;
-            setErrorMsg(msg);
+            setErrorMsg(messages.error.login.default);
         } finally {
             setLoading(false);
         }
@@ -75,7 +75,7 @@ const LoginForm: React.FC = () => {
                 </p>
             )}
             {errorMsg && (
-                <p className="text-sm text-red-600 font-medium bg-red-100 p-2 rounded">
+                <p className="text-sm text-red-700 font-medium bg-red-100 p-2 rounded">
                     {errorMsg}
                 </p>
             )}
