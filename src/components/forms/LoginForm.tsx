@@ -7,6 +7,7 @@ import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
 import Spinner from '../ui/Spinner';
 import { messages } from '../../lib/messages';
+import { loginUser } from '../../lib/login';
 
 const LoginForm: React.FC = () => {
     const {
@@ -25,6 +26,16 @@ const LoginForm: React.FC = () => {
         setLoading(true);
         setSuccessMsg('');
         setErrorMsg('');
+
+        try {
+            const res = await loginUser(data);
+            setSuccessMsg(messages.success.login);
+        } catch (err: any) {
+            const msg = err.response?.data?.message || messages.error.login;
+            setErrorMsg(msg);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
