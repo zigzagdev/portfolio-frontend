@@ -59,15 +59,17 @@ const LoginForm: React.FC = () => {
                 className="w-full mb-5"
             />
 
-            <Button type="submit" className="w-full mt-7 mb-7" disabled={loading}>
-                {loading ? (
-                    <div className="flex items-center justify-center gap-2">
-                        <Spinner size="sm" /> Logging in...
-                    </div>
-                ) : (
-                    'Log In'
-                )}
-            </Button>
+            <div className="mt-10 mb-6">
+                <Button type="submit" className="w-full" disabled={loading}>
+                    {loading ? (
+                        <div className="flex items-center justify-center gap-2">
+                            <Spinner size="sm"/> Logging in...
+                        </div>
+                    ) : (
+                        'Log in'
+                    )}
+                </Button>
+            </div>
 
             {successMsg && (
                 <p className="text-sm text-green-600 font-medium bg-green-100 p-2 rounded">

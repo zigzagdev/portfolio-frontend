@@ -6,4 +6,4 @@ export type ButtonProps = {
     className?: string;
     value?: string;
     loading?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
