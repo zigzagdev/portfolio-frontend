@@ -5,7 +5,10 @@ export const messages = {
     },
     error: {
         registration: 'Registration failed. Please try again.',
-        login: 'Login failed. Please check your credentials.',
         unexpected: 'Unexpected error occurred. Please try again later.',
+        login: {
+            default: 'Login failed. Please check your email or password.',
+            accountLocked: 'Your account has been locked. Please contact support.',
+        },
     },
 };

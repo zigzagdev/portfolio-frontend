@@ -18,12 +18,10 @@ const LoginForm: React.FC = () => {
     });
 
     const [loading, setLoading] = useState(false);
-    const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
     const onSubmit = async (data: LoginFormValues) => {
         setLoading(true);
-        setSuccessMsg('');
         setErrorMsg('');
     };
 
@@ -43,28 +41,24 @@ const LoginForm: React.FC = () => {
             <PasswordInput
                 label="Password"
                 {...register('password')}
-                placeholder="Minimum 6 characters"
                 error={errors.password?.message}
                 className="w-full mb-5"
             />
 
-            <Button type="submit" className="w-full mt-7 mb-7" disabled={loading}>
-                {loading ? (
-                    <div className="flex items-center justify-center gap-2">
-                        <Spinner size="sm" /> Logging in...
-                    </div>
-                ) : (
-                    'Log In'
-                )}
-            </Button>
+            <div className="mt-10 mb-6">
+                <Button type="submit" className="w-full" disabled={loading}>
+                    {loading ? (
+                        <div className="flex items-center justify-center gap-2">
+                            <Spinner size="sm"/> Logging in...
+                        </div>
+                    ) : (
+                        'Log in'
+                    )}
+                </Button>
+            </div>
 
-            {successMsg && (
-                <p className="text-sm text-green-600 font-medium bg-green-100 p-2 rounded">
-                    {successMsg}
-                </p>
-            )}
             {errorMsg && (
-                <p className="text-sm text-red-600 font-medium bg-red-100 p-2 rounded">
+                <p className="text-sm text-red-700 font-medium bg-red-100 p-2 rounded">
                     {errorMsg}
                 </p>
             )}

@@ -9,8 +9,10 @@ import Button from '../ui/Button';
 import { registerUser } from '../../lib/register';
 import { messages } from '../../lib/messages';
 import Spinner from '../ui/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm: React.FC = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -31,9 +33,11 @@ const RegistrationForm: React.FC = () => {
         try {
             const res = await registerUser(data);
             setSuccessMsg(messages.success.registration);
+
+            navigate('/dashboard');
         } catch (err: any) {
             const msg =
-                err.response?.data?.message || setErrorMsg(messages.error.registration);
+                err.response?.data?.message || messages.error.registration;
             setErrorMsg(msg);
         } finally {
             setLoading(false);
