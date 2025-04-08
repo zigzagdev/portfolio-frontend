@@ -1,44 +1,39 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegistrationFormValues, registrationSchema } from '../../hooks/RegisterValidation';
-import TextInput from '../ui/TextInput';
+import { LoginFormValues, loginSchema } from '../../hooks/LoginValidation';
 import EmailInput from '../ui/EmailInput';
 import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
-import { registerUser } from '../../lib/register';
-import { messages } from '../../lib/messages';
 import Spinner from '../ui/Spinner';
+import { messages } from '../../lib/messages';
+import { loginUser } from '../../lib/login';
 import { useNavigate } from 'react-router-dom';
 
-const RegistrationForm: React.FC = () => {
+const LoginForm: React.FC = () => {
     const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<RegistrationFormValues>({
-        resolver: zodResolver(registrationSchema),
+    } = useForm<LoginFormValues>({
+        resolver: zodResolver(loginSchema),
     });
 
     const [loading, setLoading] = useState(false);
-    const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const onSubmit = async (data: RegistrationFormValues) => {
+    const onSubmit = async (data: LoginFormValues) => {
         setLoading(true);
-        setSuccessMsg('');
         setErrorMsg('');
 
+        // TODO: Add account lockout handling for excessive failed attempts
         try {
-            const res = await registerUser(data);
-            setSuccessMsg(messages.success.registration);
+            await loginUser(data);
 
             navigate('/dashboard');
         } catch (err: any) {
-            const msg =
-                err.response?.data?.message || messages.error.registration;
-            setErrorMsg(msg);
+            setErrorMsg(messages.error.login.default);
         } finally {
             setLoading(false);
         }
@@ -49,22 +44,6 @@ const RegistrationForm: React.FC = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-5 bg-white p-8 rounded-xl shadow-lg w-full"
         >
-            <TextInput
-                label="First Name"
-                {...register('firstName')}
-                placeholder="e.g. Taro"
-                error={errors.firstName?.message}
-                className="w-full"
-            />
-
-            <TextInput
-                label="Last Name"
-                {...register('lastName')}
-                placeholder="e.g. Yamada"
-                error={errors.lastName?.message}
-                className="w-full"
-            />
-
             <EmailInput
                 label="Email Address"
                 {...register('email')}
@@ -76,7 +55,7 @@ const RegistrationForm: React.FC = () => {
             <PasswordInput
                 label="Password"
                 {...register('password')}
-                placeholder="Minimum 6 characters"
+                placeholder="e.g. at least 6 characters"
                 error={errors.password?.message}
                 className="w-full mb-5"
             />
@@ -85,27 +64,21 @@ const RegistrationForm: React.FC = () => {
                 <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                         <div className="flex items-center justify-center gap-2">
-                            <Spinner size="sm" /> Submitting...
+                            <Spinner size="sm"/> Logging in...
                         </div>
                     ) : (
-                        'Register'
+                        'Log in'
                     )}
                 </Button>
             </div>
 
-            {successMsg && (
-                <p className="text-sm text-green-600 font-medium bg-green-100 p-2 rounded">
-                    {successMsg}
-                </p>
-            )}
             {errorMsg && (
-                <p className="text-sm text-red-600 font-medium bg-red-100 p-2 rounded">
+                <p className="text-sm text-red-700 font-medium bg-red-100 p-2 rounded">
                     {errorMsg}
                 </p>
             )}
-
         </form>
     );
 };
 
-export default RegistrationForm;
+export default LoginForm;
