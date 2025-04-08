@@ -21,18 +21,15 @@ const LoginForm: React.FC = () => {
     });
 
     const [loading, setLoading] = useState(false);
-    const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
     const onSubmit = async (data: LoginFormValues) => {
         setLoading(true);
-        setSuccessMsg('');
         setErrorMsg('');
 
-        // need to add account lock logic here.
+        // TODO: Add account lockout handling for excessive failed attempts
         try {
-            const res = await loginUser(data);
-            setSuccessMsg(messages.success.login);
+            await loginUser(data);
 
             navigate('/dashboard');
         } catch (err: any) {
@@ -58,7 +55,7 @@ const LoginForm: React.FC = () => {
             <PasswordInput
                 label="Password"
                 {...register('password')}
-                placeholder="Minimum 6 characters"
+                placeholder="e.g. at least 6 characters"
                 error={errors.password?.message}
                 className="w-full mb-5"
             />
@@ -75,11 +72,6 @@ const LoginForm: React.FC = () => {
                 </Button>
             </div>
 
-            {successMsg && (
-                <p className="text-sm text-green-600 font-medium bg-green-100 p-2 rounded">
-                    {successMsg}
-                </p>
-            )}
             {errorMsg && (
                 <p className="text-sm text-red-700 font-medium bg-red-100 p-2 rounded">
                     {errorMsg}
