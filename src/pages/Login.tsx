@@ -10,14 +10,14 @@ const Login: React.FC = () => {
                     Log In
                 </h1>
                 <p className="text-center text-gray-600 mb-10">
-                    Welcome back! Please enter your credentials.
+                    Welcome back! Please log in to continue.
                 </p>
                 <LoginForm />
                 <p className="text-sm text-center text-gray-500 mt-2 pt-8">
-                    Don't have an account?{" "}
-                    <Link to="/register" className="text-indigo-600 hover:underline">
+                    Don’t have an account?{" "}
+                    <a href="/register" className="text-indigo-600 hover:underline">
                         Sign up
-                    </Link>
+                    </a>
                 </p>
             </section>
         </main>
