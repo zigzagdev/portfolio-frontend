@@ -8,8 +8,10 @@ import Button from '../ui/Button';
 import Spinner from '../ui/Spinner';
 import { messages } from '../../lib/messages';
 import { loginUser } from '../../lib/login';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -31,6 +33,8 @@ const LoginForm: React.FC = () => {
         try {
             const res = await loginUser(data);
             setSuccessMsg(messages.success.login);
+
+            navigate('/dashboard');
         } catch (err: any) {
             setErrorMsg(messages.error.login.default);
         } finally {
