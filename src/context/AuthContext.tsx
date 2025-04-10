@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser(null);
             localStorage.removeItem('token');
         } catch (err) {
-            console.error('Logout failed:', err);
+            alert(err);
         }
     };
 
