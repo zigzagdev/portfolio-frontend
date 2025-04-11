@@ -1,22 +1,27 @@
 import React from "react";
 import RegistrationForm from "../components/forms/RegistrationForm";
+import { Link } from "react-router-dom";
 
 const Register: React.FC = () => {
     return (
-        <main className="flex justify-center min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 px-4">
-            <section className="w-full max-w-lg bg-white rounded-3xl shadow-xl p-10 flex flex-col gap-y-6">
-                <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
-                    Sign Up
-                </h1>
-                <p className="text-center text-gray-600 mb-10">
-                    Start your journey with us — it's quick and easy!
-                </p>
-                <RegistrationForm/>
-                <p className="text-sm text-center text-gray-500 mt-2 pt-8">
+        <main className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-100 via-indigo-100 to-pink-100 px-4">
+            <section className="max-w-lg bg-white rounded-2xl shadow-2xl p-10 flex flex-col gap-y-6">
+                <div className="text-center">
+                    <h1 className="text-3xl font-extrabold text-gray-800 mb-2">
+                        Create your account
+                    </h1>
+                    <p className="text-gray-500 text-sm">
+                        Start your journey with us — it's quick and easy!
+                    </p>
+                </div>
+
+                <RegistrationForm />
+
+                <p className="text-sm text-center text-gray-500">
                     Already have an account?{" "}
-                    <a href="/login" className="text-indigo-600 hover:underline">
+                    <Link to="/login" className="text-indigo-600 font-medium hover:underline">
                         Log in
-                    </a>
+                    </Link>
                 </p>
             </section>
         </main>

@@ -1,9 +1,13 @@
 import { RouteObject } from 'react-router-dom';
-import App from "../App";
+import AppLayout from '../layouts/AppLayout';
+import Dashboard from '../pages/DashBoard';
 
 export const dashboardRoutes: RouteObject[] = [
     {
         path: '/',
-        element: <App />
-    },
+        element: <AppLayout />,
+        children: [
+            { path: '', element: <Dashboard /> }
+        ]
+    }
 ];
