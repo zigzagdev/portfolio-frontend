@@ -13,7 +13,7 @@ const TextareaInput = React.forwardRef<HTMLTextAreaElement, TextareaInputProps>(
         },
         ref
     ) => (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2 w-full max-w-xl">
             {label && (
                 <label htmlFor={props.name} className="text-sm font-medium text-gray-700">
                     {label}
@@ -24,7 +24,7 @@ const TextareaInput = React.forwardRef<HTMLTextAreaElement, TextareaInputProps>(
                 ref={ref}
                 rows={rows}
                 {...props}
-                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                className={`resize-none w-full px-4 py-2 border rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${
                     error ? 'border-red-500' : 'border-gray-300'
                 } ${className}`}
             />

@@ -47,7 +47,7 @@ const RegistrationForm: React.FC = () => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-5 bg-white p-8 rounded-xl shadow-lg w-full"
+            className="flex flex-col gap-5 bg-white p-8 rounded-xl shadow-lg"
         >
             <TextInput
                 label="First Name"
@@ -78,10 +78,10 @@ const RegistrationForm: React.FC = () => {
                 {...register('password')}
                 placeholder="Minimum 6 characters"
                 error={errors.password?.message}
-                className="w-full mb-5"
+                className="w-full mb-5 mt-10"
             />
 
-            <div className="mt-10 mb-6">
+            <div className="mt-10">
                 <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                         <div className="flex items-center justify-center gap-2">
