@@ -8,11 +8,14 @@ const Dashboard: React.FC = () => {
     const navigate = useNavigate();
 
     const [errorMsg, setErrorMsg] = useState('');
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     const handleLogout = async () => {
         try {
+            setIsLoggingOut(true);
             await logout();
             navigate('/login');
+            setIsLoggingOut(false);
         } catch (error) {
             setErrorMsg('Logout failed. Please try again.');
         }
@@ -27,8 +30,8 @@ const Dashboard: React.FC = () => {
                 <p className="text-gray-600 mb-10">
                     You are successfully logged in. You can log out using the button below.
                 </p>
-                <Button onClick={handleLogout} className="w-full max-w-sm mx-auto">
-                    Logout
+                <Button onClick={handleLogout} disabled={isLoggingOut} className="w-full max-w-sm mx-auto">
+                    {isLoggingOut ? 'Logging out...' : 'Logout'}
                 </Button>
                 {errorMsg && (
                     <p className="text-red-500 mt-4">
