@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
@@ -7,9 +7,15 @@ const Dashboard: React.FC = () => {
     const { logout } = useAuth();
     const navigate = useNavigate();
 
+    const [errorMsg, setErrorMsg] = useState('');
+
     const handleLogout = async () => {
-        await logout();
-        navigate('/login');
+        try {
+            await logout();
+            navigate('/login');
+        } catch (error) {
+            setErrorMsg('Logout failed. Please try again.');
+        }
     };
 
     return (
@@ -24,6 +30,11 @@ const Dashboard: React.FC = () => {
                 <Button onClick={handleLogout} className="w-full max-w-sm mx-auto">
                     Logout
                 </Button>
+                {errorMsg && (
+                    <p className="text-red-500 mt-4">
+                        {errorMsg}
+                    </p>
+                )}
             </section>
         </main>
     );
