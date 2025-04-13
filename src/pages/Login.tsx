@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
-        <main className="flex justify-center min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 px-4">
+        <main className="flex items-center justify-center min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 px-4">
             <section
                 className="w-full max-w-lg bg-white rounded-3xl shadow-xl p-10 flex flex-col gap-y-6"
                 aria-labelledby="login-heading"

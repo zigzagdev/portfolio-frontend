@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body:not(.no-global-style) {
+        @apply bg-gray-100 text-gray-900 min-h-screen flex justify-center items-center;
+    }
+
+    main {
+        @apply w-full max-w-3xl p-6 bg-white rounded-2xl shadow-md;
+    }
+
+    h1 {
+        @apply text-3xl font-bold mb-4;
+    }
+
+    a {
+        @apply text-indigo-600 hover:underline font-medium;
+    }
+}
