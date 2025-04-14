@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
+import { messages } from "../lib/messages";
 
 const Dashboard: React.FC = () => {
     const { logout } = useAuth();
@@ -17,10 +18,9 @@ const Dashboard: React.FC = () => {
             navigate('/login');
             setIsLoggingOut(false);
         } catch (error) {
-            setErrorMsg('Logout failed. Please try again.');
-        }
-    };
-
+            console.log(error);
+            setErrorMsg(messages.error.unexpected);
+        }};
     return (
         <main className="bg-gray-700">
             <section className="bg-white rounded-3xl shadow-xl p-10 w-full max-w-2xl text-center">
