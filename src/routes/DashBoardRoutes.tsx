@@ -1,7 +1,8 @@
 import { RouteObject } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
 import Dashboard from '../pages/DashBoard';
-import ProtectedRoute from './ProtectedRoute';
+// import ProtectedRoute from './ProtectedRoute';
+import UserProfilePage from '../pages/UserProfilePage';
 
 export const dashboardRoutes: RouteObject[] = [
     {
@@ -9,13 +10,21 @@ export const dashboardRoutes: RouteObject[] = [
         element: <AppLayout />,
         children: [
             {
-                path: '',
+                path: '/dashboard',
                 element: (
-                    <ProtectedRoute>
+                    // <ProtectedRoute>
                         <Dashboard />
-                    </ProtectedRoute>
-                )
-            }
+                    // </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/profile',
+                element: (
+                    // <ProtectedRoute>
+                        <UserProfilePage />
+                    // </ProtectedRoute>
+                ),
+            },
         ]
     }
 ];
