@@ -6,7 +6,7 @@ import EmailInput from '../ui/EmailInput';
 import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
 import Spinner from '../ui/Spinner';
-import { messages } from '../../lib/messages';
+import { LoginFormTypes } from "./LoginForm.types";
 
 const LoginForm: React.FC = () => {
     const {
@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
-    const onSubmit = async (data: LoginFormValues) => {
+    const onSubmit = async (data: LoginFormTypes) => {
         setLoading(true);
         setErrorMsg('');
     };
