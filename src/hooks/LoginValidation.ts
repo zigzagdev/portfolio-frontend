@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { messages } from "../lib/messages";
+import { LoginFormTypes } from '../components/forms/LoginForm.types';
 
 export const loginSchema = z.object({
     email: z.string()
@@ -14,4 +15,4 @@ export const loginSchema = z.object({
         .max(255, messages.error.max('Password', 255))
 });
 
-export type LoginFormValues = z.infer<typeof loginSchema>;
+export type LoginFormValues = LoginFormTypes & z.infer<typeof loginSchema>;
