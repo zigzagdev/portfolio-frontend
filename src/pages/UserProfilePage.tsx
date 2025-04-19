@@ -3,7 +3,7 @@ import UserProfile from '../components/profile/UserProfile';
 import { UserProfile as UserProfileType } from '../lib/userProfile';
 import NotFound from "./NotFound";
 import Spinner from "../components/ui/Spinner";
-import {messages} from "../lib/messages";
+import { messages } from "../lib/messages";
 
 const UserProfilePage: React.FC = () => {
     const [user, setUser] = useState<UserProfileType | null>(null);
@@ -14,7 +14,7 @@ const UserProfilePage: React.FC = () => {
         const fetchUser = async () => {
             try {
                 const res = await fetch('/api/me');
-                if (!res.ok) throw new Error('Failed to fetch');
+                if (!res.ok) throw new Error(messages.error.unexpected);
 
                 const data: UserProfileType = await res.json();
                 setUser(data);
