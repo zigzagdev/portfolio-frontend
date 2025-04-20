@@ -6,7 +6,6 @@ import EmailInput from '../ui/EmailInput';
 import PasswordInput from '../ui/PasswordInput';
 import Button from '../ui/Button';
 import Spinner from '../ui/Spinner';
-import { messages } from '../../lib/messages';
 
 const LoginForm: React.FC = () => {
     const {
@@ -23,6 +22,15 @@ const LoginForm: React.FC = () => {
     const onSubmit = async (data: LoginFormValues) => {
         setLoading(true);
         setErrorMsg('');
+
+        try {
+            console.log('Submitting login form with data:', data);
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        } catch (err) {
+            setErrorMsg('Login failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -49,7 +57,7 @@ const LoginForm: React.FC = () => {
                 <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                         <div className="flex items-center justify-center gap-2">
-                            <Spinner size="sm"/> Logging in...
+                            <Spinner size="sm" /> Logging in...
                         </div>
                     ) : (
                         'Log in'
