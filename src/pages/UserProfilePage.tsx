@@ -4,6 +4,7 @@ import { UserProfile as UserProfileType } from '../lib/userProfile';
 import NotFound from "./NotFound";
 import Spinner from "../components/ui/Spinner";
 import { messages } from "../lib/messages";
+import {ErrorMessage} from "../components/ui/ErrorMessage";
 
 const UserProfilePage: React.FC = () => {
     const [user, setUser] = useState<UserProfileType | null>(null);
@@ -30,7 +31,7 @@ const UserProfilePage: React.FC = () => {
     }, []);
 
     if (loading) return <Spinner size="lg" className="mx-auto mt-20" />;
-    if (errorMsg) return <p className="text-red-600">{errorMsg}</p>;
+    if (errorMsg) return <ErrorMessage message={errorMsg}/>;
     if (!user) return <NotFound />;
 
     return (
