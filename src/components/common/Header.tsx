@@ -1,51 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Spinner from "../ui/Spinner"
+import Spinner from "../ui/Spinner";
 
 const Header = () => {
     const { user, loading, logout } = useAuth();
+    const [menuOpen, setMenuOpen] = useState(false);
 
     if (loading) return <Spinner />;
 
-    return (
-        <header className="flex justify-between items-center px-6 py-4 bg-white shadow">
-            <Link to="/" className="text-lg font-bold text-gray-800">
-                MyApp
-            </Link>
+    const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-            <nav>
-                {user ? (
-                    <ul className="flex gap-4 items-center">
-                        <li>
+    return (
+        <header className="bg-white shadow px-6 py-4">
+            <div className="flex justify-between items-center">
+                <Link to="/" className="text-lg font-bold text-gray-800">
+                    MyApp
+                </Link>
+
+                <button
+                    className="md:hidden text-gray-600 focus:outline-none"
+                    onClick={toggleMenu}
+                >
+                    ☰
+                </button>
+
+                <nav className="hidden md:flex gap-4 items-center">
+                    {user ? (
+                        <>
                             <Link to="/profile" className="text-blue-600 hover:underline">
                                 My Profile
                             </Link>
-                        </li>
-                        <li>
                             <button
                                 onClick={logout}
                                 className="text-red-600 hover:underline"
                             >
                                 Logout
                             </button>
-                        </li>
-                    </ul>
-                ) : (
-                    <ul className="flex gap-4 items-center">
-                        <li>
+                        </>
+                    ) : (
+                        <>
                             <Link to="/login" className="text-gray-600 hover:underline">
                                 Login
                             </Link>
-                        </li>
-                        <li>
                             <Link to="/register" className="text-gray-600 hover:underline">
                                 Register
                             </Link>
-                        </li>
-                    </ul>
-                )}
-            </nav>
+                        </>
+                    )}
+                </nav>
+            </div>
+
+            {menuOpen && (
+                <nav className="md:hidden mt-4 flex flex-col gap-2">
+                    {user ? (
+                        <>
+                            <Link
+                                to="/profile"
+                                className="text-blue-600 hover:underline"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                My Profile
+                            </Link>
+                            <button
+                                onClick={() => {
+                                    logout();
+                                    setMenuOpen(false);
+                                }}
+                                className="text-red-600 hover:underline text-left"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                to="/login"
+                                className="text-gray-600 hover:underline"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                to="/register"
+                                className="text-gray-600 hover:underline"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Register
+                            </Link>
+                        </>
+                    )}
+                </nav>
+            )}
         </header>
     );
 };
