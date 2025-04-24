@@ -1,33 +1,51 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import Spinner from "../ui/Spinner"
 
 const Header = () => {
-    return (
-        <header className="sticky top-0 z-50 bg-white border-b shadow-sm h-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-                <div className="text-lg font-semibold text-gray-800">
-                    MyApp
-                </div>
-                <nav className="hidden md:flex gap-6">
-                    <a href="#about" className="text-sm text-gray-600 hover:text-black transition">
-                        Profile
-                    </a>
-                    <a href="#features" className="text-sm text-gray-600 hover:text-black transition">
-                        Features
-                    </a>
-                </nav>
+    const { user, loading, logout } = useAuth();
 
-                <div className="flex items-center gap-4">
-                    <a href="#login" className="text-sm text-gray-600 hover:text-black transition">
-                        Log in
-                    </a>
-                    <a
-                        href="#signup"
-                        className="text-sm bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
-                    >
-                        Sign up
-                    </a>
-                </div>
-            </div>
+    if (loading) return <Spinner />;
+
+    return (
+        <header className="flex justify-between items-center px-6 py-4 bg-white shadow">
+            <Link to="/" className="text-lg font-bold text-gray-800">
+                MyApp
+            </Link>
+
+            <nav>
+                {user ? (
+                    <ul className="flex gap-4 items-center">
+                        <li>
+                            <Link to="/profile" className="text-blue-600 hover:underline">
+                                My Profile
+                            </Link>
+                        </li>
+                        <li>
+                            <button
+                                onClick={logout}
+                                className="text-red-600 hover:underline"
+                            >
+                                Logout
+                            </button>
+                        </li>
+                    </ul>
+                ) : (
+                    <ul className="flex gap-4 items-center">
+                        <li>
+                            <Link to="/login" className="text-gray-600 hover:underline">
+                                Login
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/register" className="text-gray-600 hover:underline">
+                                Register
+                            </Link>
+                        </li>
+                    </ul>
+                )}
+            </nav>
         </header>
     );
 };
