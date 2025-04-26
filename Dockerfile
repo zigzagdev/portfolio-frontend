@@ -1,16 +1,13 @@
-FROM node:22-alpine
+FROM node:20-slim
 
-RUN apk add --no-cache git
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-
 RUN npm install
-RUN npm run prepare
 
 COPY . .
 
 EXPOSE 5173
-
 CMD ["npm", "run", "dev"]
