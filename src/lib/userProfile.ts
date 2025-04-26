@@ -1,8 +1,10 @@
 export type UserProfile = {
-    id: string;
-    name: string;
+    id: number;
+    firstName: string;
+    lastName: string;
     email: string;
-    avatarUrl?: string;
     bio?: string;
+    location?: string;
     skills?: string[];
+    profileImage?: string;
 };
