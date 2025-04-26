@@ -24,12 +24,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await fetch('/api/me');
-                if (res.ok) {
-                    const data = await res.json();
-                    setUser(data);
+
+                const isMock = 'true';
+
+                if (isMock) {
+                    const mockUser = {
+                        id: 1,
+                        firstName: 'Mock',
+                        lastName: 'User',
+                        email: 'mock@example.com',
+                        bio: 'This is a mock bio.',
+                        location: 'Tokyo, Japan',
+                        skills: ['React', 'TypeScript', 'Tailwind'],
+                        profileImage: 'https://i.pravatar.cc/150?u=mock',
+                    };
+                    setUser(mockUser);
                 } else {
-                    setUser(null);
+                    const res = await fetch('/api/me');
+                    if (res.ok) {
+                        const data = await res.json();
+                        setUser(data);
+                    } else {
+                        setUser(null);
+                    }
                 }
             } catch (err) {
                 setUser(null);

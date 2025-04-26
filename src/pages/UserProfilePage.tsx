@@ -14,6 +14,23 @@ const UserProfilePage: React.FC = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
+                const isMock = 'true';
+
+                if (isMock) {
+                    const mockUser: UserProfileType = {
+                        id: 1,
+                        firstName: 'Mock',
+                        lastName: 'User',
+                        email: 'mock@example.com',
+                        bio: 'This is a mock bio.',
+                        location: 'Tokyo, Japan',
+                        skills: ['React', 'TypeScript', 'Tailwind'],
+                        profileImage: 'https://i.pravatar.cc/150?u=mock',
+                    };
+                    setUser(mockUser);
+                    return;
+                }
+
                 const res = await fetch('/api/me');
                 if (!res.ok) throw new Error(messages.error.unexpected);
 
