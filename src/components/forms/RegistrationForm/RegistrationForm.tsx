@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegistrationFormValues, registrationSchema } from '../../hooks/RegisterValidation';
-import TextInput from '../ui/TextInput';
-import EmailInput from '../ui/EmailInput';
-import PasswordInput from '../ui/PasswordInput';
-import Button from '../ui/Button';
-import { registerUser } from '../../lib/register';
-import { messages } from '../../lib/messages';
-import Spinner from '../ui/Spinner';
+import { RegistrationFormValues, registrationSchema } from '../../../hooks/RegisterValidation';
+import TextInput from '../../ui/TextInput';
+import EmailInput from '../../ui/EmailInput';
+import PasswordInput from '../../ui/PasswordInput';
+import Button from '../../ui/Button';
+import { registerUser } from '../../../lib/register';
+import { messages } from '../../../lib/messages';
+import Spinner from '../../ui/Spinner';
 import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm: React.FC = () => {
