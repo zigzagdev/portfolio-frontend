@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { authRoutes } from './routes/AuthRoutes';
 import { dashboardRoutes } from './routes/DashBoardRoutes';
-import Footer from './components/common/Footer';
+import FooterContainer from './components/common/Footer/FooterContainer';
 
 const App: React.FC = () => {
     const { user } = useAuth();
@@ -13,7 +13,7 @@ const App: React.FC = () => {
     return (
         <>
             {routes}
-            <Footer />
+            <FooterContainer />
         </>
     );
 };

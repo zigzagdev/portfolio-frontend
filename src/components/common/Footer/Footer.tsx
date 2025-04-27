@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
-    const [region, setRegion] = useState<string>("");
+export type FooterProps = {
+    region: string;
+};
 
-    useEffect(() => {
-        const lang = navigator.language;
-        if (lang.startsWith("ja")) {
-            setRegion("Japan");
-        } else if (lang.startsWith("en")) {
-            setRegion("USA");
-        } else {
-            setRegion("Global");
-        }
-    }, []);
-
+const Footer = ({ region }: FooterProps) => {
     return (
         <footer className="bg-gray-100 text-gray-700 text-sm py-6 px-4 mt-8">
             <div className="flex flex-col items-start lg:items-center">
