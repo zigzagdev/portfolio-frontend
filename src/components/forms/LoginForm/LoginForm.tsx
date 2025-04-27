@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginFormValues, loginSchema } from '../../hooks/LoginValidation';
-import EmailInput from '../ui/EmailInput';
-import PasswordInput from '../ui/PasswordInput';
-import Button from '../ui/Button';
-import Spinner from '../ui/Spinner';
+import { LoginFormValues, loginSchema } from '../../../hooks/LoginValidation';
+import EmailInput from '../../ui/EmailInput';
+import PasswordInput from '../../ui/PasswordInput';
+import Button from '../../ui/Button';
+import Spinner from '../../ui/Spinner';
 
 const LoginForm: React.FC = () => {
     const {
