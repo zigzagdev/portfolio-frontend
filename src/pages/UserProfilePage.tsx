@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import UserProfile from '../components/profile/UserProfile';
+import ProfileImageUploader from '../components/profile/profile-image-uploader/ProfileImageUploader';
 import { UserProfile as UserProfileType } from '../lib/userProfile';
 import NotFound from "./NotFound";
 import Spinner from "../components/ui/Spinner";
@@ -53,7 +53,7 @@ const UserProfilePage: React.FC = () => {
 
     return (
         <main className="bg-gray-100 min-h-screen py-10 px-4">
-            <UserProfile user={user} />
+            <ProfileImageUploader user={user} />
         </main>
     );
 };

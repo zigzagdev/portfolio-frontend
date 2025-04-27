@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { messages } from "../lib/messages";
-import { LoginFormTypes } from '../components/forms/LoginForm/LoginForm.types';
+import { LoginFormTypes } from '../components/forms/login-form/LoginForm.types';
 
 export const loginSchema = z.object({
     email: z.string()
