@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProfileImageUploader from '../components/profile/profile-image-uploader/ProfileImageUploader';
-import { UserProfile as UserProfileType } from '../lib/userProfile';
+import { UserProfile as UserProfileType } from '../lib/user-profile';
 import NotFound from "./NotFound";
 import Spinner from "../components/ui/Spinner";
 import { messages } from "../lib/messages";

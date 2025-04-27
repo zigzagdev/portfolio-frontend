@@ -1,11 +1,4 @@
-export type UserProfile = {
-    profileImage: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    bio?: string;
-    skills?: string[];
-};
+import { UserProfile } from '../../../lib/user-profile';
 
 export type ProfileImageUploaderProps = {
     user: UserProfile;
