@@ -13,6 +13,10 @@ const ProfileImageUploaderContainer: React.FC<Props> = ({ user }) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+        }
+
         const url = URL.createObjectURL(file);
         setPreviewUrl(url);
     };
