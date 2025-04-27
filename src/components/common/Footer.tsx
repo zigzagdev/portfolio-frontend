@@ -17,9 +17,9 @@ const Footer = () => {
 
     return (
         <footer className="bg-gray-100 text-gray-600 text-sm py-6 px-4 mt-8">
-            <div className="flex flex-col items-center sm:items-start">
+            <div className="flex flex-col items-start lg:items-center">
                 <p className="mb-4">&copy; {new Date().getFullYear()} MyApp {region}. All rights reserved.</p>
-                <div className="flex flex-col sm:flex-row sm:gap-4 gap-2">
+                <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-start lg:items-center">
                     <Link to="/about" className="hover:underline">
                         About
                     </Link>

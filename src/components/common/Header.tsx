@@ -28,20 +28,6 @@ const Header = () => {
                 <nav className="hidden md:flex gap-4 items-center">
                     {user ? (
                         <>
-                            <div className="flex items-center gap-2">
-                                {user.profileImage ? (
-                                    <img
-                                        src={user.profileImage}
-                                        alt="User Avatar"
-                                        className="w-8 h-8 rounded-full object-cover"
-                                    />
-                                ) : (
-                                    <span className="text-gray-800 font-medium">
-                                        {user.firstName} {user.lastName}
-                                    </span>
-                                )}
-                            </div>
-
                             <Link
                                 to="/profile"
                                 className="flex items-center gap-2 text-blue-600 hover:underline"
