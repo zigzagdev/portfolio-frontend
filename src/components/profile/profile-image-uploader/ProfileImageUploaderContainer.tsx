@@ -21,7 +21,7 @@ const ProfileImageUploaderContainer: React.FC<Props> = ({ user }) => {
             setPreviewUrl(null);
             return;
         }
-        setErrorMsg('');
+        setErrorMsg(null);
 
         if (previewUrl) {
             URL.revokeObjectURL(previewUrl);
