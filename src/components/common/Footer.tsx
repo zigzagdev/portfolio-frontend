@@ -14,11 +14,12 @@ const Footer = () => {
             setRegion("Global");
         }
     }, []);
+
     return (
         <footer className="bg-gray-100 text-gray-600 text-sm py-6 px-4 mt-8">
-            <div className="flex flex-col items-center">
-                <p className="mb-2">&copy; {new Date().getFullYear()} MyApp { region }. All rights reserved.</p>
-                <div className="flex gap-4">
+            <div className="flex flex-col items-center sm:items-start">
+                <p className="mb-4">&copy; {new Date().getFullYear()} MyApp {region}. All rights reserved.</p>
+                <div className="flex flex-col sm:flex-row sm:gap-4 gap-2">
                     <Link to="/about" className="hover:underline">
                         About
                     </Link>
