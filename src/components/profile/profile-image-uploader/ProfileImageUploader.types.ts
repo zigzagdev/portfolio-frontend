@@ -5,4 +5,5 @@ export type ProfileImageUploaderProps = {
     previewUrl: string | null ;
     onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     errorMsg?: string | null;
+    successMsg?: string | null;
 };
