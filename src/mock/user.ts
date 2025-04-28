@@ -1,8 +1,10 @@
-export const mockUser = {
-    id: 'u001',
-    firstName: 'Taro',
-    lastName: 'Yamada',
-    email: 'taro@example.com',
+import { User } from '../lib/user';
+
+export const mockUser: User = {
+    id: 1,
+    firstName: 'David',
+    lastName: 'Silva',
+    email: 'manchester21@example.com',
     bio: 'Software Engineer with a passion for web development and open-source projects.',
     location: 'Tokyo, Japan',
     skills: ['Laravel', 'React', 'TypeScript'],
