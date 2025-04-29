@@ -5,7 +5,7 @@ export const mockUserProfile: UserProfile = {
     firstName: 'Cristiano',
     lastName: 'Ronaldo',
     email: 'ogi@example.com',
-    profileImage: 'https://i.pravatar.cc/150?img=5',
+    profileImage: '',
     bio: 'Laravel + React developer',
     skills: ['Laravel', 'React', 'TypeScript'],
 };
