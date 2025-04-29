@@ -1,10 +1,11 @@
-import { UserProfile } from '../lib/userProfile';
+import { UserProfile } from '../lib/user-profile';
 
 export const mockUserProfile: UserProfile = {
-    id: '1',
-    name: 'Masatoshi Ogiwara',
+    id: 1,
+    firstName: 'Cristiano',
+    lastName: 'Ronaldo',
     email: 'ogi@example.com',
-    avatarUrl: 'https://i.pravatar.cc/150?img=5',
+    profileImage: '',
     bio: 'Laravel + React developer',
     skills: ['Laravel', 'React', 'TypeScript'],
 };

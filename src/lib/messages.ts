@@ -2,6 +2,10 @@ export const messages = {
     success: {
         registration: 'Registration successful!',
         login: 'Logged in successfully!',
+        upload: {
+            success: 'Upload successful!',
+            progress: 'Upload in progress...',
+        }
     },
     error: {
         required: (field: string) =>  `${ field } is required.`,
@@ -13,5 +17,10 @@ export const messages = {
             default: 'Login failed. Please check your email or password.',
             accountLocked: 'Your account has been locked. Please contact support.',
         },
+        upload: {
+            default: 'Upload failed. Please try again.',
+            fileSize: (maxSize: number) => `File size exceeds the limit of ${ maxSize } MB.`,
+            invalidType: 'Invalid file type. Please upload a valid image.',
+        }
     },
 };

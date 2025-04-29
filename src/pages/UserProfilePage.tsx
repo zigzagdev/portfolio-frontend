@@ -1,59 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import UserProfile from '../components/profile/UserProfile';
-import { UserProfile as UserProfileType } from '../lib/userProfile';
-import NotFound from "./NotFound";
+import React, { useState } from 'react';
+import ProfileImageUploader from '../components/profile/profile-image-uploader/ProfileImageUploader';
 import Spinner from "../components/ui/Spinner";
 import { messages } from "../lib/messages";
-import {ErrorMessage} from "../components/ui/ErrorMessage";
+import { ErrorMessage } from "../components/ui/ErrorMessage";
+import NotFound from "./NotFound";
+import { useAuth } from "../context/AuthContext";
 
 const UserProfilePage: React.FC = () => {
-    const [user, setUser] = useState<UserProfileType | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [errorMsg, setErrorMsg] = useState('');
+    const { user, setUser, loading } = useAuth();
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const isMock = 'true';
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || !user) return;
 
-                if (isMock) {
-                    const mockUser: UserProfileType = {
-                        id: 1,
-                        firstName: 'Mock',
-                        lastName: 'User',
-                        email: 'mock@example.com',
-                        bio: 'This is a mock bio.',
-                        location: 'Tokyo, Japan',
-                        skills: ['React', 'TypeScript', 'Tailwind'],
-                        profileImage: 'https://i.pravatar.cc/150?u=mock',
-                    };
-                    setUser(mockUser);
-                    return;
-                }
+        const newPreviewUrl = URL.createObjectURL(file);
+        setPreviewUrl(newPreviewUrl);
+        setSuccessMsg(null);
+        setErrorMsg(null);
 
-                const res = await fetch('/api/me');
-                if (!res.ok) throw new Error(messages.error.unexpected);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            if (typeof reader.result === 'string') {
+                const newImage = reader.result;
 
-                const data: UserProfileType = await res.json();
-                setUser(data);
-            } catch (err) {
-                console.error(err);
-                setErrorMsg(messages.error.unexpected);
-            } finally {
-                setLoading(false);
+                setUploadedImageUrl(newImage);
+                setSuccessMsg(messages.success.upload.success);
+
+                setUser(prev => prev ? { ...prev, profileImage: newImage } : prev);
             }
         };
-
-        fetchUser();
-    }, []);
+        reader.readAsDataURL(file);
+    };
 
     if (loading) return <Spinner size="lg" className="mx-auto mt-20" />;
-    if (errorMsg) return <ErrorMessage message={errorMsg}/>;
+    if (errorMsg) return <ErrorMessage message={errorMsg} />;
     if (!user) return <NotFound />;
 
     return (
         <main className="bg-gray-100 min-h-screen py-10 px-4">
-            <UserProfile user={user} />
+            <ProfileImageUploader
+                user={user}
+                previewUrl={previewUrl}
+                uploadedImageUrl={uploadedImageUrl}
+                onFileChange={handleFileChange}
+                errorMsg={errorMsg}
+                successMsg={successMsg}
+            />
         </main>
     );
 };
