@@ -2,11 +2,11 @@ import React from 'react';
 
 type Props = {
     email: string;
-    onEmailChange: (value: string) => void;
+    onEmailChange: (email: string) => void;
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     loading?: boolean;
-    successMsg?: string;
-    errorMsg?: string;
+    successMsg: string | null;
+    errorMsg: string | null;
 };
 
 const PasswordResetRequestForm: React.FC<Props> =

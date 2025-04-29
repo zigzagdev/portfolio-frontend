@@ -21,6 +21,16 @@ export const messages = {
             default: 'Upload failed. Please try again.',
             fileSize: (maxSize: number) => `File size exceeds the limit of ${ maxSize } MB.`,
             invalidType: 'Invalid file type. Please upload a valid image.',
+        },
+        password: {
+            default: 'Password is invalid.',
+            null: 'Password is required.',
+            minLength: (min: number) => `Password must be at least ${ min } characters long.`,
+            maxLength: (max: number) => `Password must be at most ${ max } characters long.`,
+        },
+        token: {
+            default: 'Token is invalid or expired.',
+            null: 'Token is required.',
         }
     },
 };
