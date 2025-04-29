@@ -17,7 +17,7 @@ const ProfileImageUploaderContainer: React.FC<Props> = ({ userProfile }) => {
 
     useEffect(() => {
         if (uploadedImageUrl) {
-            console.log("🟢 uploadedImageUrl:", uploadedImageUrl);
+            setPreviewUrl(uploadedImageUrl);
         }
     }, [uploadedImageUrl]);
 
@@ -30,7 +30,6 @@ const ProfileImageUploaderContainer: React.FC<Props> = ({ userProfile }) => {
             setSuccessMsg(messages.success.upload.success);
             setErrorMsg(null);
         } catch (error) {
-            console.error('Upload failed', error);
             setErrorMsg(messages.error.upload.default);
             setSuccessMsg(null);
         }
