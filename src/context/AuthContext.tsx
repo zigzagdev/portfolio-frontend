@@ -4,13 +4,15 @@ import {
     useState,
     useEffect,
     ReactNode,
+    Dispatch,
+    SetStateAction,
 } from 'react';
 import { logoutUser } from '../lib/logout';
 import { User } from '../lib/user';
 
 type AuthContextType = {
     user: User | null;
-    setUser: (user: User | null) => void;
+    setUser: Dispatch<SetStateAction<User | null>>;
     logout: () => Promise<void>;
     loading: boolean;
 };
