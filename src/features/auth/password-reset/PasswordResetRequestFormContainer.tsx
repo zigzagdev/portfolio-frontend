@@ -1,16 +1,8 @@
 import React from 'react';
 import Spinner from '../../../components/ui/Spinner';
+import { PasswordResetRequestFormProps } from './type';
 
-type Props = {
-    email: string;
-    onEmailChange: (email: string) => void;
-    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-    loading?: boolean;
-    successMsg: string | null;
-    errorMsg: string | null;
-};
-
-const PasswordResetRequestFormContainer: React.FC<Props> =
+const PasswordResetRequestFormContainer: React.FC<PasswordResetRequestFormProps> =
     ({
          email,
          onEmailChange,
