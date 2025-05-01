@@ -1,49 +1,55 @@
-import React, { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import PasswordResetForm from '../../../components/auth/PasswordResetRequestForm';
-import {messages} from "../../../lib/messages";
-import emailInput from "../../../components/ui/EmailInput";
+import React from 'react';
+import Spinner from '../../../components/ui/Spinner';
 
-const PasswordResetRequestFormContainer: React.FC = () => {
-    const [params] = useSearchParams();
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState<boolean>(false);
-    const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [successMsg, setSuccessMsg] = useState<string | null>(null);
-    const [email, setEmail] = useState<string>('');
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setErrorMsg(null);
-        setSuccessMsg(null);
-
-        if (!token) {
-            setErrorMsg(messages.error.token.null);
-            return;
-        }
-
-        setLoading(true);
-        const res = { success: true };
-        setLoading(false);
-
-        if (res.success) {
-            setSuccessMsg('Password reset successful. Redirecting...');
-            setTimeout(() => navigate('/login'), 2000);
-        } else {
-            setErrorMsg('Password reset failed. Please try again.');
-        }
-    };
-
-    return (
-        <PasswordResetForm
-            email={emailInput}
-            onEmailChange={(setEmail) => setEmail}
-            onSubmit={handleSubmit}
-            loading={loading}
-            errorMsg={errorMsg}
-            successMsg={successMsg}
-        />
-    );
+type Props = {
+    email: string;
+    onEmailChange: (email: string) => void;
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    loading?: boolean;
+    successMsg: string | null;
+    errorMsg: string | null;
 };
+
+const PasswordResetRequestFormContainer: React.FC<Props> =
+    ({
+         email,
+         onEmailChange,
+         onSubmit,
+         loading = false,
+         successMsg,
+         errorMsg,
+     }) => {
+        return (
+            <form onSubmit={onSubmit} className="max-w-md mx-auto p-6 bg-white shadow rounded space-y-4">
+                <h2 className="text-xl font-semibold text-center">Forgot your password?</h2>
+
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => onEmailChange(e.target.value)}
+                    placeholder="Email address"
+                    className="w-full border px-3 py-2 rounded"
+                    required
+                />
+
+                {errorMsg && <p className="text-red-600 text-sm">{errorMsg}</p>}
+                {successMsg && <p className="text-green-600 text-sm">{successMsg}</p>}
+
+                <button
+                    type="submit"
+                    className="w-full bg-blue-600 text-white py-2 rounded disabled:opacity-50"
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <div className="flex items-center justify-center gap-2">
+                            <Spinner size="sm" /> Sending...
+                        </div>
+                    ) : (
+                        'Send reset email'
+                    )}
+                </button>
+            </form>
+        );
+    };
 
 export default PasswordResetRequestFormContainer;
