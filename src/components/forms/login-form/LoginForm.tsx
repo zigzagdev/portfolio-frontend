@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginFormValues, loginSchema } from '../../../hooks/login-validation';
+import { LoginFormValues, loginSchema } from '../../../hooks/validation/login';
 import EmailInput from '../../ui/EmailInput';
 import PasswordInput from '../../ui/PasswordInput';
 import Button from '../../ui/Button';

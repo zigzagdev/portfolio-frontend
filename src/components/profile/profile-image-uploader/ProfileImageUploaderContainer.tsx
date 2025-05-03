@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProfileImageUploader from './ProfileImageUploader';
 import { UserProfile } from '../../../lib/user-profile';
-import { validateProfileImage } from '../../../hooks/upload-profile-validation';
+import { validateProfileImage } from '../../../hooks/validation/upload-profile';
 import { uploadProfileImageMock } from '../../../mock/upload-profile-image';
 import { messages } from "../../../lib/messages";
 
