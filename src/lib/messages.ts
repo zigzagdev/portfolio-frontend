@@ -10,6 +10,10 @@ export const messages = {
             password:{
                 success: 'Password reset link sent successfully!',
                 progress: 'Sending password reset link...',
+            },
+            email: {
+                success: 'Email sent successfully!',
+                progress: 'Sending email...',
             }
         },
     },
@@ -50,6 +54,11 @@ export const messages = {
                 minLength: (min: number) => `Password must be at least ${ min } characters long.`,
                 maxLength: (max: number) => `Password must be at most ${ max } characters long.`,
             },
-        }
+            email: {
+                default: 'Failed to send email. Please try again.',
+                null: 'Email is required.',
+                invalid: 'Invalid email address.',
+            }
+        },
     },
 };

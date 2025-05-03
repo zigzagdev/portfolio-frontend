@@ -5,4 +5,5 @@ export type PasswordResetRequestFormProps = {
     loading?: boolean;
     successMsg: string | null;
     errorMsg: string | null;
+    loadingUI: React.ReactNode | null;
 };
