@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { messages } from '../../../lib/messages';
 import PasswordResetForm from '../../../components/auth/PasswordResetForm';
+import { passwordResetSchema } from '../../../hooks/validation/password-reset';
 
 const PasswordResetConfirmContainer: React.FC = () => {
     const [password, setPassword] = useState('');
@@ -14,8 +15,11 @@ const PasswordResetConfirmContainer: React.FC = () => {
         setSuccessMsg('');
         setErrorMsg('');
 
-        if (password !== confirmPassword) {
-            setErrorMsg(messages.error.reset.password.notMatch);
+        const result = passwordResetSchema.safeParse({ password, confirmPassword });
+
+        if (!result.success) {
+            const firstError = result.error.errors[0]?.message || messages.error.reset.password.default;
+            setErrorMsg(firstError);
             return;
         }
 

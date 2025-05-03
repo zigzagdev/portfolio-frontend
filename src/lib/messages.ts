@@ -51,9 +51,11 @@ export const messages = {
             password: {
                 default: 'Password reset failed. Please try again.',
                 null: 'Password is required.',
-                minLength: (min: number) => `Password must be at least ${ min } characters long.`,
-                maxLength: (max: number) => `Password must be at most ${ max } characters long.`,
+                minLength: (min: number) => `Password must be at least ${min} characters long.`,
+                maxLength: (max: number) => `Password must be at most ${max} characters long.`,
                 notMatch: 'Passwords do not match.',
+                weak: 'Password is too weak. Include a mix of letters, numbers, and symbols.',
+                invalidFormat: 'Password must include at least one uppercase letter, one lowercase letter, and one number.',
             },
             email: {
                 default: 'Failed to send email. Please try again.',
