@@ -12,6 +12,7 @@ const PasswordResetRequestFormContainer: React.FC<PasswordResetRequestFormProps>
         loading = false,
         successMsg,
         errorMsg,
+        loadingUI,
     }) => {
     const [validationError, setValidationError] = useState<string | null>(null);
 
@@ -53,13 +54,14 @@ const PasswordResetRequestFormContainer: React.FC<PasswordResetRequestFormProps>
                 className="w-full bg-blue-600 text-white py-2 rounded disabled:opacity-50"
                 disabled={loading}
             >
-                {loading ? (
+                {loading
+                    ? loadingUI || (
                     <div className="flex items-center justify-center gap-2">
-                        <Spinner size="sm" /> Sending...
+                        <Spinner size="sm"/>
+                        Sending...
                     </div>
-                ) : (
-                    'Send reset email'
-                )}
+                )
+                    : 'Send reset email'}
             </button>
         </form>
     );
