@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { messages } from "../lib/messages";
+import { messages } from "../../lib/messages";
 
 export const registrationSchema = z.object({
     firstName: z.string()
