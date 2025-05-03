@@ -1,54 +1,55 @@
 import React, { useState } from 'react';
-import PasswordResetRequestFormContainer from './PasswordResetRequestFormContainer';
-import {messages} from "../../../lib/messages";
-import Spinner from "../../../components/ui/Spinner";
+import { messages } from '../../../lib/messages';
+import PasswordResetForm from '../../../components/auth/PasswordResetForm';
 
-const PasswordResetContainer: React.FC = () => {
-    const [email, setEmail] = useState('');
+const PasswordResetConfirmContainer: React.FC = () => {
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const [loadingUI, setLoadingUI] = useState<React.ReactNode>(null);
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true);
         setSuccessMsg('');
         setErrorMsg('');
 
+        if (password !== confirmPassword) {
+            setErrorMsg(messages.error.reset.password.notMatch);
+            return;
+        }
+
+        setLoading(true);
+
         try {
-            const response = await fetch('/api/password-reset-request', {
+            const response = await fetch('/api/password-reset-confirm', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ password }),
             });
 
-            if (!response.ok) throw new Error('Failed to send reset email');
+            if (!response.ok) throw new Error();
 
-            setSuccessMsg(messages.success.reset.email.success);
-        } catch (err) {
-            setErrorMsg(messages.error.reset.email.default);
+            setSuccessMsg(messages.success.reset.password.success);
+        } catch {
+            setErrorMsg(messages.error.reset.password.default);
         } finally {
-            setLoadingUI(
-                <div className="flex items-center gap-2">
-                    <Spinner size="sm" />
-                    <span>{messages.success.reset.email.progress}</span>
-                </div>
-            );
+            setLoading(false);
         }
     };
 
     return (
-        <PasswordResetRequestFormContainer
-            email={email}
-            onEmailChange={setEmail}
+        <PasswordResetForm
+            password={password}
+            confirmPassword={confirmPassword}
+            onPasswordChange={setPassword}
+            onConfirmPasswordChange={setConfirmPassword}
             onSubmit={handleSubmit}
             loading={loading}
             successMsg={successMsg}
             errorMsg={errorMsg}
-            loadingUI={loadingUI}
         />
     );
 };
 
-export default PasswordResetContainer;
+export default PasswordResetConfirmContainer;
