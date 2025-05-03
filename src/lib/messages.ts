@@ -53,6 +53,7 @@ export const messages = {
                 null: 'Password is required.',
                 minLength: (min: number) => `Password must be at least ${ min } characters long.`,
                 maxLength: (max: number) => `Password must be at most ${ max } characters long.`,
+                notMatch: 'Passwords do not match.',
             },
             email: {
                 default: 'Failed to send email. Please try again.',
