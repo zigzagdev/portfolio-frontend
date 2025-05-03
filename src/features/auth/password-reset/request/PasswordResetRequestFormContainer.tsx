@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Spinner from '../../../components/ui/Spinner';
-import { passwordResetRequestSchema } from '../../../hooks/validation/password-reset-form';
+import Spinner from '../../../../components/ui/Spinner';
+import { passwordResetRequestSchema } from '../../../../hooks/validation/password-reset-form';
 import { PasswordResetRequestFormProps } from './type';
-import EmailInput from '../../../components/ui/EmailInput';
+import EmailInput from '../../../../components/ui/EmailInput';
 
 const PasswordResetRequestFormContainer: React.FC<PasswordResetRequestFormProps> = (
     {

@@ -1,18 +1,8 @@
 import React from 'react';
+import { PasswordResetProps } from "../../features/auth/password-reset/type";
 
-type Props = {
-    password: string;
-    confirmPassword: string;
-    onPasswordChange: (value: string) => void;
-    onConfirmPasswordChange: (value: string) => void;
-    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-    loading?: boolean;
-    successMsg: string | null;
-    errorMsg: string | null;
-};
-
-const PasswordResetForm: React.FC<Props> =
-    ({
+const PasswordResetForm: React.FC<PasswordResetProps> = (
+    {
         password,
         confirmPassword,
         onPasswordChange,
@@ -21,8 +11,7 @@ const PasswordResetForm: React.FC<Props> =
         loading = false,
         successMsg,
         errorMsg,
-    }) =>
-    {
+    }) => {
     return (
         <form onSubmit={onSubmit} className="max-w-md mx-auto p-6 bg-white shadow rounded space-y-4">
             <h2 className="text-xl font-semibold text-center">Reset your password</h2>
@@ -31,22 +20,24 @@ const PasswordResetForm: React.FC<Props> =
                 New password
             </label>
             <input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => onPasswordChange(e.target.value)}
-                placeholder="New password"
+                placeholder="Enter new password"
                 className="w-full border px-3 py-2 rounded"
                 required
             />
 
-            <label htmlFor="new password" className="block text-sm font-medium text-gray-700">
-                New password
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                Confirm new password
             </label>
             <input
+                id="confirmPassword"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => onConfirmPasswordChange(e.target.value)}
-                placeholder="Confirm password"
+                placeholder="Confirm new password"
                 className="w-full border px-3 py-2 rounded"
                 required
             />
@@ -63,6 +54,6 @@ const PasswordResetForm: React.FC<Props> =
             </button>
         </form>
     );
-    };
+};
 
 export default PasswordResetForm;

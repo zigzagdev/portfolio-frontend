@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { messages } from "../../lib/messages";
-import { PasswordResetRequestFormProps } from '../../features/auth/password-reset/type';
+import { PasswordResetRequestFormProps } from '../../features/auth/password-reset/request/type';
 
 export const passwordResetRequestSchema = z.object({
     email: z.string()
