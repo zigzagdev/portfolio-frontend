@@ -3,7 +3,7 @@ import PasswordInput from '../../ui/PasswordInput';
 import Button from '../../ui/Button';
 import Spinner from '../../ui/Spinner';
 import { Type } from '../../../features/auth/login/type';
-
+import { Link } from 'react-router-dom';
 
 const LoginForm: React.FC<Type> = ({ register, errors, loading, errorMsg, onSubmit }) => {
     return (
@@ -27,12 +27,17 @@ const LoginForm: React.FC<Type> = ({ register, errors, loading, errorMsg, onSubm
                 <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                         <div className="flex items-center justify-center gap-2">
-                            <Spinner size="sm" /> Logging in...
+                            <Spinner size="sm"/> Logging in...
                         </div>
                     ) : (
                         'Log in'
                     )}
                 </Button>
+            </div>
+            <div className="text-right">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                    Forgot password?
+                </Link>
             </div>
 
             {errorMsg && (
