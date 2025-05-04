@@ -1,43 +1,13 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginFormValues, loginSchema } from '../../../hooks/validation/login';
 import EmailInput from '../../ui/EmailInput';
 import PasswordInput from '../../ui/PasswordInput';
 import Button from '../../ui/Button';
 import Spinner from '../../ui/Spinner';
+import { Type } from '../../../features/auth/login/type';
+import { Link } from 'react-router-dom';
 
-const LoginForm: React.FC = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<LoginFormValues>({
-        resolver: zodResolver(loginSchema),
-    });
-
-    const [loading, setLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
-
-    const onSubmit = async (data: LoginFormValues) => {
-        setLoading(true);
-        setErrorMsg('');
-
-        try {
-            console.log('Submitting login form with data:', data);
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-        } catch (err) {
-            setErrorMsg('Login failed. Please try again.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
+const LoginForm: React.FC<Type> = ({ register, errors, loading, errorMsg, onSubmit }) => {
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-5 bg-white p-8 rounded-xl shadow-lg w-full"
-        >
+        <form onSubmit={onSubmit} className="flex flex-col gap-5 bg-white p-8 rounded-xl shadow-lg w-full">
             <EmailInput
                 label="Email Address"
                 {...register('email')}
@@ -57,12 +27,17 @@ const LoginForm: React.FC = () => {
                 <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                         <div className="flex items-center justify-center gap-2">
-                            <Spinner size="sm" /> Logging in...
+                            <Spinner size="sm"/> Logging in...
                         </div>
                     ) : (
                         'Log in'
                     )}
                 </Button>
+            </div>
+            <div className="text-right">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                    Forgot password?
+                </Link>
             </div>
 
             {errorMsg && (
