@@ -3,5 +3,4 @@ export type RegistrationFormValues = {
     lastName: string;
     email: string;
     password: string;
-    value: string;
 };
