@@ -7,5 +7,4 @@ export type User = {
     location?: string;
     skills?: string[];
     profileImage?: string;
-
 };
