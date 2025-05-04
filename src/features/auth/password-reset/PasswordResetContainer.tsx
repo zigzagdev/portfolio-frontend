@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { messages } from '../../../lib/messages';
 import PasswordResetForm from '../../../components/auth/PasswordResetForm';
 import { passwordResetSchema } from '../../../hooks/validation/password-reset';
+import { requestPasswordResetConfirm } from '../../../lib/password-reset-confirm';
 
 const PasswordResetConfirmContainer: React.FC = () => {
     const [password, setPassword] = useState('');
@@ -9,13 +10,17 @@ const PasswordResetConfirmContainer: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const token = new URLSearchParams(window.location.search).get('token') || '';
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSuccessMsg('');
         setErrorMsg('');
 
-        const result = passwordResetSchema.safeParse({ password, confirmPassword });
+        const result = passwordResetSchema.safeParse({
+            password,
+            passwordConfirmation: confirmPassword,
+        });
 
         if (!result.success) {
             const firstError = result.error.errors[0]?.message || messages.error.reset.password.default;
@@ -26,16 +31,14 @@ const PasswordResetConfirmContainer: React.FC = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('/api/password-reset-confirm', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password }),
+            await requestPasswordResetConfirm({
+                token,
+                password,
+                passwordConfirmation: confirmPassword,
             });
 
-            if (!response.ok) throw new Error();
-
             setSuccessMsg(messages.success.reset.password.success);
-        } catch {
+        } catch (err) {
             setErrorMsg(messages.error.reset.password.default);
         } finally {
             setLoading(false);
