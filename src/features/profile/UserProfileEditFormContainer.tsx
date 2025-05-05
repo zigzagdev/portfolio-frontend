@@ -6,6 +6,8 @@ import UserProfileEditForm from '../../components/profile/ProfileEditForm';
 import { mockUser } from "../../mock/user";
 import { getDefaultUserProfileValues } from "../../lib/user";
 import {messages} from "../../lib/messages";
+import { updateUserProfile } from "../../lib/user-profile";
+
 
 type Props = {
     onComplete?: () => void;
@@ -31,7 +33,8 @@ const UserProfileEditFormContainer: React.FC<Props> = ({onComplete}) => {
         setLoading(true);
 
         try {
-            console.log('Submitting form:', data);
+            const updatedUser = await updateUserProfile(data);
+            console.log('Updated user:', updatedUser);
             setSuccessMsg(messages.success.update.profile.success);
             if (onComplete) {
                 onComplete();
