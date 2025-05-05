@@ -31,14 +31,12 @@ const RegistrationForm: React.FC = () => {
         setErrorMsg('');
 
         try {
-            const res = await registerUser(data);
-            setSuccessMsg(messages.success.registration);
+            await registerUser(data);
+            setSuccessMsg(messages.success.register.user.success);
 
             navigate('/dashboard');
-        } catch (err: any) {
-            const msg =
-                err.response?.data?.message || messages.error.registration;
-            setErrorMsg(msg);
+        } catch {
+            setErrorMsg(messages.error.register.user.default);
         } finally {
             setLoading(false);
         }
