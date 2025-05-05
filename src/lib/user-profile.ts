@@ -8,3 +8,19 @@ export type UserProfile = {
     skills?: string[];
     profileImage?: string;
 };
+
+export async function updateUserProfile(data: Partial<UserProfile>): Promise<UserProfile> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log('Mock updated user:', data);
+            resolve({
+                id: 1,
+                email: 'test@example.com',
+                firstName: data.firstName || 'Taro',
+                lastName: data.lastName || 'Yamada',
+                bio: data.bio || '',
+                location: data.location || '',
+            });
+        }, 1000);
+    });
+}
