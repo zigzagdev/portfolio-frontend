@@ -10,16 +10,17 @@ const PostSubmissionFormContainer: React.FC = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
-    const { watch } = useForm();
-    const title = watch('title');
-    const content = watch('content');
-
     const {
+        watch,
         handleSubmit,
         formState: { errors },
     } = useForm<PostSubmissionValues>({
         resolver: zodResolver(postSubmissionSchema),
     });
+
+    const title = watch('title');
+    const content = watch('content');
+
 
     const onSubmit = async (data: PostSubmissionValues) => {
         setSuccessMsg('');
