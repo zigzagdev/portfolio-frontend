@@ -8,3 +8,16 @@ export type User = {
     skills?: string[];
     profileImage?: string;
 };
+
+export function getDefaultUserProfileValues(): Partial<User> {
+    return {
+        firstName: '',
+        lastName: '',
+        email: '',
+        bio: '',
+        location: '',
+        skills: [],
+        profileImage: '',
+
+    };
+}

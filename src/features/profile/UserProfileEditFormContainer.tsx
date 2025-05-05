@@ -4,8 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { UserProfileEditFormValues, userProfileEditSchema } from '../../hooks/validation/user-profile-edit';
 import UserProfileEditForm from '../../components/profile/ProfileEditForm';
 import { mockUser } from "../../mock/user";
+import { getDefaultUserProfileValues } from "../../lib/user";
+import {messages} from "../../lib/messages";
 
-const UserProfileEditFormContainer: React.FC = () => {
+type Props = {
+    onComplete?: () => void;
+};
+
+const UserProfileEditFormContainer: React.FC<Props> = ({onComplete}) => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
@@ -16,12 +22,7 @@ const UserProfileEditFormContainer: React.FC = () => {
         formState: { errors },
     } = useForm<UserProfileEditFormValues>({
         resolver: zodResolver(userProfileEditSchema),
-        defaultValues: {
-            firstName: '',
-            lastName: '',
-            bio: '',
-            location: '',
-        },
+        defaultValues: getDefaultUserProfileValues(),
     });
 
     const onSubmit = async (data: UserProfileEditFormValues) => {
@@ -31,9 +32,12 @@ const UserProfileEditFormContainer: React.FC = () => {
 
         try {
             console.log('Submitting form:', data);
-            setSuccessMsg('Profile updated!');
-        } catch (err) {
-            setErrorMsg('Failed to update profile.');
+            setSuccessMsg(messages.success.update.profile.success);
+            if (onComplete) {
+                onComplete();
+            }
+        } catch {
+            setErrorMsg(messages.error.update.profile.default);
         } finally {
             setLoading(false);
         }
@@ -42,7 +46,10 @@ const UserProfileEditFormContainer: React.FC = () => {
     return (
         <UserProfileEditForm
             user={mockUser}
-            onChange={(updated) => reset((prev) => ({ ...prev, ...updated }), { keepErrors: true })}
+            onChange={(updated) =>
+                reset((prev) =>
+                    ({ ...prev, ...updated }), { keepErrors: true })
+            }
             onSubmit={handleSubmit(onSubmit)}
             successMsg={successMsg}
             errorMsg={Object.values(errors)[0]?.message || errorMsg}
