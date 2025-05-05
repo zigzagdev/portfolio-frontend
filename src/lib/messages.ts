@@ -30,7 +30,13 @@ export const messages = {
                 success: 'Profile updated successfully!',
                 progress: 'Updating profile...',
             }
-        }
+        },
+        submit: {
+            post: {
+                success: 'Post submitted successfully!',
+                progress: 'Submitting post...',
+            }
+        },
     },
     error: {
         required: (field: string) =>  `${ field } is required.`,
@@ -97,6 +103,13 @@ export const messages = {
                 default: 'Profile update failed. Please try again.',
                 null: 'Profile data is required.',
                 invalid: 'Invalid profile data.'
+            }
+        },
+        submit: {
+            post: {
+                default: 'Post submission failed. Please try again.',
+                null: 'Post data is required.',
+                invalid: 'Invalid post data.'
             }
         }
     },

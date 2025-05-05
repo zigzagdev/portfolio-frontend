@@ -4,18 +4,23 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import PostSubmissionForm from '../../../components/post/PostSubmissionForm';
 import { postSubmissionSchema, PostSubmissionValues } from '../../../hooks/validation/post-submission';
 import { createPost } from '../../../lib/post';
+import {messages} from "../../../lib/messages";
 
 const PostSubmissionFormContainer: React.FC = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
-
     const {
+        watch,
         handleSubmit,
         formState: { errors },
     } = useForm<PostSubmissionValues>({
         resolver: zodResolver(postSubmissionSchema),
     });
+
+    const title = watch('title');
+    const content = watch('content');
+
 
     const onSubmit = async (data: PostSubmissionValues) => {
         setSuccessMsg('');
@@ -24,9 +29,9 @@ const PostSubmissionFormContainer: React.FC = () => {
 
         try {
             await createPost(data);
-            setSuccessMsg('Your post has been successfully submitted.');
+            setSuccessMsg(messages.success.submit.post.success);
         } catch {
-            setErrorMsg('Something went wrong. Please try again.');
+            setErrorMsg(messages.error.submit.post.default);
         } finally {
             setLoading(false);
         }
@@ -34,8 +39,8 @@ const PostSubmissionFormContainer: React.FC = () => {
 
     return (
         <PostSubmissionForm
-            title={''}
-            content={''}
+            title={title}
+            content={content}
             onTitleChange={() => {}}
             onBodyChange={() => {}}
             onSubmit={handleSubmit(onSubmit)}
