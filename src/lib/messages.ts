@@ -16,6 +16,12 @@ export const messages = {
                 progress: 'Sending email...',
             }
         },
+        update: {
+            profile: {
+                success: 'Profile updated successfully!',
+                progress: 'Updating profile...',
+            }
+        }
     },
     error: {
         required: (field: string) =>  `${ field } is required.`,
@@ -63,5 +69,12 @@ export const messages = {
                 invalid: 'Invalid email address.',
             }
         },
+        update: {
+            profile: {
+                default: 'Profile update failed. Please try again.',
+                null: 'Profile data is required.',
+                invalid: 'Invalid profile data.'
+            }
+        }
     },
 };
