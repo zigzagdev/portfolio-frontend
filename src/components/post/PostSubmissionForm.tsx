@@ -6,7 +6,7 @@ import Spinner from '../ui/Spinner';
 
 type Props = {
     title: string;
-    body: string;
+    content: string;
     onTitleChange: (value: string) => void;
     onBodyChange: (value: string) => void;
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -15,16 +15,17 @@ type Props = {
     successMsg?: string;
 };
 
-const PostSubmissionForm: React.FC<Props> = ({
-                                                 title,
-                                                 body,
-                                                 onTitleChange,
-                                                 onBodyChange,
-                                                 onSubmit,
-                                                 loading = false,
-                                                 errorMsg,
-                                                 successMsg,
-                                             }) => {
+const PostSubmissionForm: React.FC<Props> = (
+    {
+        title,
+        content,
+        onTitleChange,
+        onBodyChange,
+        onSubmit,
+        loading = false,
+        errorMsg,
+        successMsg
+    }) => {
     return (
         <form
             onSubmit={onSubmit}
@@ -42,7 +43,7 @@ const PostSubmissionForm: React.FC<Props> = ({
 
             <Textarea
                 label="Body"
-                value={body}
+                value={content}
                 onChange={(e) => onBodyChange(e.target.value)}
                 placeholder="Write your post here..."
                 rows={6}
