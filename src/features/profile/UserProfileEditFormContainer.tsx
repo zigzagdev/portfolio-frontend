@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserProfileEditFormValues, userProfileEditSchema } from '../../hooks/validation/user-profile-edit';
 import UserProfileEditForm from '../../components/profile/ProfileEditForm';
-import { mockUser } from "../../mock/user";
 import { getDefaultUserProfileValues } from "../../lib/user";
 import {messages} from "../../lib/messages";
 import { updateUserProfile } from "../../lib/user-profile";
+import { useAuth } from "../../context/AuthContext";
 
 
 type Props = {
@@ -17,6 +17,7 @@ const UserProfileEditFormContainer: React.FC<Props> = ({onComplete}) => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
+    const { user } = useAuth();
 
     const {
         handleSubmit,
@@ -26,6 +27,17 @@ const UserProfileEditFormContainer: React.FC<Props> = ({onComplete}) => {
         resolver: zodResolver(userProfileEditSchema),
         defaultValues: getDefaultUserProfileValues(),
     });
+
+    useEffect(() => {
+        if (user) {
+            reset({
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                bio: user.bio || '',
+                location: user.location || '',
+            });
+        }
+    }, [user, reset]);
 
     const onSubmit = async (data: UserProfileEditFormValues) => {
         setSuccessMsg('');
@@ -48,7 +60,7 @@ const UserProfileEditFormContainer: React.FC<Props> = ({onComplete}) => {
 
     return (
         <UserProfileEditForm
-            user={mockUser}
+            user={user!}
             onChange={(updated) =>
                 reset((prev) =>
                     ({ ...prev, ...updated }), { keepErrors: true })
