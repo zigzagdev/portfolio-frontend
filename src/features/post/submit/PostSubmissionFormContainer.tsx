@@ -35,7 +35,7 @@ const PostSubmissionFormContainer: React.FC = () => {
     return (
         <PostSubmissionForm
             title={''}
-            body={''}
+            content={''}
             onTitleChange={() => {}}
             onBodyChange={() => {}}
             onSubmit={handleSubmit(onSubmit)}
