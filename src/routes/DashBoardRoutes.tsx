@@ -3,6 +3,7 @@ import AppLayout from '../layouts/AppLayout';
 import Dashboard from '../pages/DashBoard';
 import ProtectedRoute from './ProtectedRoute';
 import UserProfilePage from '../pages/UserProfilePage';
+import PostSubmissionFormContainer from "../features/post/submit/PostSubmissionFormContainer";
 
 export const dashboardRoutes: RouteObject[] = [
     {
@@ -25,6 +26,14 @@ export const dashboardRoutes: RouteObject[] = [
                     </ProtectedRoute>
                 ),
             },
+            {
+                path: '/user/:userId/post',
+                element: (
+                    <ProtectedRoute>
+                        <PostSubmissionFormContainer />
+                    </ProtectedRoute>
+                ),
+            }
         ]
     }
 ];
