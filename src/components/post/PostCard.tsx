@@ -4,6 +4,8 @@ type PostCardProps = {
     content: string;
     authorName: string;
     createdAt: string;
+    likesCount?: number;
+    isLiked?: boolean;
 };
 
 const PostCard: React.FC<PostCardProps> = ({ content, authorName, createdAt }) => {
