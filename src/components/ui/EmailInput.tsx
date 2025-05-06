@@ -1,5 +1,5 @@
 import React from 'react';
-import { EmailInputProps } from './EmailInput.types';
+import { EmailInputProps } from './types/EmailInput.types';
 
 const EmailInput = React.forwardRef<HTMLInputElement, EmailInputProps>(
     ({ label, error, required, className = '', ...inputProps }, ref) => (

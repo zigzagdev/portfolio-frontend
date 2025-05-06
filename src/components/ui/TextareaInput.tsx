@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextareaInputProps } from './TextareaInput.types';
+import { TextareaInputProps } from './types/TextareaInput.types';
 
 const TextareaInput = React.forwardRef<HTMLTextAreaElement, TextareaInputProps>(
     (
