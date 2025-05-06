@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInputProps } from './TextInput.types';
+import { TextInputProps } from './types/TextInput.types';
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     (
