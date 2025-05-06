@@ -1,9 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 import AppLayout from '../layouts/AppLayout';
-import Dashboard from '../pages/DashBoard';
 import ProtectedRoute from './ProtectedRoute';
 import UserProfilePage from '../pages/UserProfilePage';
 import PostSubmissionFormContainer from "../features/post/submit/PostSubmissionFormContainer";
+import DashboardContainer from "../features/dashboard/DashboardContainer";
 
 export const dashboardRoutes: RouteObject[] = [
     {
@@ -14,7 +14,7 @@ export const dashboardRoutes: RouteObject[] = [
                 path: '/dashboard',
                 element: (
                     <ProtectedRoute>
-                        <Dashboard />
+                        <DashboardContainer />
                     </ProtectedRoute>
                 ),
             },
@@ -27,7 +27,7 @@ export const dashboardRoutes: RouteObject[] = [
                 ),
             },
             {
-                path: '/user/:userId/post',
+                path: '/profile/:userId/post',
                 element: (
                     <ProtectedRoute>
                         <PostSubmissionFormContainer />
