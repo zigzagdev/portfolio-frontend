@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { messages } from "../../lib/messages";
-import DashboardView from '../../components/pages/Dashboard';
+import Dashboard from '../../components/pages/Dashboard';
+import { mockPosts } from "../../mock/posts";
 
 const DashboardContainer: React.FC = () => {
     const { logout } = useAuth();
@@ -25,7 +26,8 @@ const DashboardContainer: React.FC = () => {
     };
 
     return (
-        <DashboardView
+        <Dashboard
+            posts={mockPosts}
             onLogout={handleLogout}
             isLoggingOut={isLoggingOut}
             errorMsg={errorMsg}
