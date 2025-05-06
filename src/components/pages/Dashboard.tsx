@@ -1,12 +1,14 @@
 import React from 'react';
 import Button from '../ui/Button';
 import PostFeed from '../post/PostFeed';
-import {mockPosts} from "../../mock/posts";
+import { mockPosts } from "../../mock/posts";
+import { Post } from "../../features/post/types/post.types";
 
 type Props = {
     onLogout: () => void;
     isLoggingOut: boolean;
     errorMsg: string;
+    posts: Post[];
 };
 
 const Dashboard: React.FC<Props> = ({ onLogout, isLoggingOut, errorMsg }) => {
