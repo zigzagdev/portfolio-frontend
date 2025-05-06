@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectInputProps } from './SelectInput.types';
+import { SelectInputProps } from './types/SelectInput.types';
 
 const SelectInput: React.FC<SelectInputProps> = (
     {
