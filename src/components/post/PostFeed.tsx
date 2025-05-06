@@ -1,6 +1,6 @@
 import React from 'react';
 import PostCard from './PostCard';
-import{ Post } from '../../features/post/types/post.types';
+import { Post } from '../../features/post/types/post.types';
 
 type PostFeedProps = {
     posts: Post[];
