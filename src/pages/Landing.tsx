@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/react.svg";
 
 export const Landing: React.FC = () => {
     return (
@@ -29,9 +28,6 @@ export const Landing: React.FC = () => {
                             Learn More
                         </a>
                     </div>
-                </div>
-                <div className="md:w-1/2 flex justify-center">
-                    <img src={logo} alt="Logo" className="w-40 md:w-56"/>
                 </div>
             </section>
         </main>

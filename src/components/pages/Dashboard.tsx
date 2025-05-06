@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from '../ui/Button';
+import PostFeed from '../post/PostFeed';
+import {mockPosts} from "../../mock/posts";
 
 type Props = {
     onLogout: () => void;
@@ -23,6 +25,12 @@ const Dashboard: React.FC<Props> = ({ onLogout, isLoggingOut, errorMsg }) => {
                 {errorMsg && (
                     <p className="text-red-500 mt-4">{errorMsg}</p>
                 )}
+            </section>
+            <section className="mt-10">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Posts</h2>
+                <PostFeed
+                    posts={mockPosts}
+                />
             </section>
         </main>
     );
