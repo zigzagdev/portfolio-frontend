@@ -1,14 +1,6 @@
 import React from 'react';
 import PostCard from './PostCard';
-
-export type Post = {
-    id: string;
-    content: string;
-    authorName: string;
-    createdAt: string;
-    likesCount?: number;
-    isLiked?: boolean;
-};
+import{ Post } from '../../features/post/types/post.types';
 
 type PostFeedProps = {
     posts: Post[];
