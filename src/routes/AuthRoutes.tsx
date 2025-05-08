@@ -4,7 +4,7 @@ import Login from '../pages/Login';
 import {Landing} from "../pages/Landing";
 import PasswordResetRequestForm from "../components/auth/PasswordResetRequestForm";
 import PasswordResetForm from "../components/auth/PasswordResetForm";
-import Dashboard from "../components/pages/Dashboard";
+// import Dashboard from "../components/pages/Dashboard";
 
 export const authRoutes: RouteObject[] = [
     {
@@ -36,12 +36,13 @@ export const authRoutes: RouteObject[] = [
             successMsg={''}
         />,
     },
-    {
-        path: '/dashboard',
-        element: <Dashboard
-            isLoggingOut={false}
-            errorMsg={''}
-            onLogout={() => {}}
-        />,
-    }
+    // {
+    //     path: '/dashboard',
+    //     element: <Dashboard
+    //         isLoggingOut={false}
+    //         errorMsg={''}
+    //         onLogout={() => {}}
+    //         posts={[]}
+    //     />,
+    // }
 ];

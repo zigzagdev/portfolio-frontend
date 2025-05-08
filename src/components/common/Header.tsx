@@ -30,12 +30,14 @@ const Header = () => {
                         <>
                             <Link
                                 to="/profile"
-                                className="flex items-center gap-2 text-blue-600 hover:underline"
+                                className="text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                                aria-label="Go to your profile page"
+                                onClick={() => setMenuOpen(false)}
                             >
                                 {user.profileImage ? (
                                     <img
                                         src={user.profileImage}
-                                        alt="User Avatar"
+                                        alt=""
                                         className="w-8 h-8 rounded-full object-cover"
                                     />
                                 ) : (
