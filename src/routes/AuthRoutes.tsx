@@ -42,6 +42,7 @@ export const authRoutes: RouteObject[] = [
             isLoggingOut={false}
             errorMsg={''}
             onLogout={() => {}}
+            posts={[]}
         />,
     }
 ];
