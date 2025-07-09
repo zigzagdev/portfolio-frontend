@@ -52,3 +52,46 @@ export default tseslint.config({
   },
 })
 ```
+---
+
+## Tailwind CSS version lock (v3.3.5 fixed)
+
+> ⚠️ **Important:** This project uses **Tailwind CSS v3.3.5**.  
+Do not upgrade to Tailwind v4. Doing so will cause PostCSS plugin errors and break the build.
+
+### Why?
+
+Tailwind v4 separates its PostCSS plugin into `@tailwindcss/postcss`, which is **incompatible** with the current `postcss.config.js`.
+
+If you see the following error:
+
+```
+[plugin:vite:css] [postcss] It looks like you're trying to use tailwindcss directly as a PostCSS plugin...
+```
+
+you’re accidentally using v4.
+
+### How to fix:
+
+1. Uninstall all Tailwind packages:
+
+```bash
+npm uninstall tailwindcss @tailwindcss/postcss @tailwindcss/node
+```
+
+2. Reinstall Tailwind v3.3.5:
+
+```bash
+npm install tailwindcss@3.3.5
+```
+
+3. Set your postcss.config.js to use the Tailwind plugin:
+
+```js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+```
