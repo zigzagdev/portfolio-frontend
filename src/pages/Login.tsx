@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginForm from "../components/forms/login-form/LoginForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { loginUser } from "../lib/login"; // ← 必要に応じてAPI呼び出し関数
+import { messages } from "../lib/messages"; // ← エラーメッセージなど
 
 type LoginFormValues = {
     email: string;
@@ -9,14 +11,34 @@ type LoginFormValues = {
 };
 
 const Login = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<LoginFormValues>();
 
-    const onSubmit = (data: LoginFormValues) => {
-        console.log(data);
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+
+    const onSubmit = async (data: LoginFormValues) => {
+        setLoading(true);
+        setErrorMsg("");
+
+        try {
+            const response = await loginUser(data);
+
+            localStorage.setItem("token", response.message);
+
+            navigate("/dashboard");
+        } catch (error: any) {
+            console.error("Login failed:", error);
+            setErrorMsg(
+                error.message || messages.error.login.default || "Login failed"
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -31,8 +53,8 @@ const Login = () => {
                 <LoginForm
                     register={register}
                     errors={errors}
-                    loading={false}
-                    errorMsg=""
+                    loading={loading}
+                    errorMsg={errorMsg}
                     onSubmit={handleSubmit(onSubmit)}
                 />
                 <p className="text-sm text-center text-gray-500 mt-2 pt-8">
