@@ -3,7 +3,6 @@ import RegistrationForm from "../components/forms/registration-form/Registration
 import { Link } from "react-router-dom";
 
 const Register: React.FC = () => {
-    console.log('Rendering Register page');
     return (
         <main className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-100 via-indigo-100 to-pink-100 px-4">
             <section className="max-w-lg bg-white rounded-2xl shadow-2xl p-10 flex flex-col gap-y-6">

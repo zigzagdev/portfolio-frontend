@@ -8,6 +8,7 @@ import FooterContainer from './components/common/Footer/FooterContainer';
 const App: React.FC = () => {
     const { user } = useAuth();
 
+    // temporarily change Routing
     const routes = useRoutes(user ? authRoutes : authRoutes);
 
     return (
