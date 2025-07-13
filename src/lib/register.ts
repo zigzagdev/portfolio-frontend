@@ -1,15 +1,23 @@
-export type RegisterFormInput = {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-};
+import axios from "axios";
+import { API_ENDPOINTS } from '../constants/env';
 
-export async function registerUser(data: RegisterFormInput) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log('📦 Mock register user:', data);
-            resolve({ message: 'Mock registration success' });
-        }, 1000);
-    });
+export async function registerUser(data: FormData) {
+    try {
+        console.log('➡️ Registering with:', {
+            url: API_ENDPOINTS.users.register,
+            data,
+        });
+
+        const response = await axios.post(`${API_ENDPOINTS.users.register}`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        console.log();
+        return response.data;
+    } catch (error: any) {
+        throw new Error(
+            error?.response?.data?.message || 'Registration failed. Please try again.'
+        );
+    }
 }
