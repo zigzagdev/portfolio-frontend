@@ -8,7 +8,8 @@ import FooterContainer from './components/common/Footer/FooterContainer';
 const App: React.FC = () => {
     const { user } = useAuth();
 
-    const routes = useRoutes(user ? dashboardRoutes : authRoutes);
+    // temporarily change Routing
+    const routes = useRoutes(user ? authRoutes : authRoutes);
 
     return (
         <>
