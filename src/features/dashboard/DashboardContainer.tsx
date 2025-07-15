@@ -5,27 +5,46 @@ import { messages } from "../../lib/messages";
 import Dashboard from '../../components/pages/Dashboard';
 import { fetchFeed } from "../../lib/post-feed";
 import { Post } from '../../features/post/types/post.types';
+import { API_ENDPOINTS } from "../../constants/env";
+import { fetchUserProfile } from '../../lib/user';
+import { User } from '../../lib/user';
+import { fetchUserPosts } from '../../lib/fetch-posts';
 
 const DashboardContainer: React.FC = () => {
     const { logout } = useAuth();
     const navigate = useNavigate();
+    const [user, setUser] = useState<User>();
 
     const [posts, setPosts] = useState<Post[]>([]);
     const [errorMsg, setErrorMsg] = useState('');
     const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     useEffect(() => {
-        const loadFeed = async () => {
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
+
+        if (!userId || !token) {
+            navigate('/login');
+            return;
+        }
+
+        const load = async () => {
             try {
-                const data = await fetchFeed();
-                setPosts(data);
+                const [userData] = await Promise.all([
+                    fetchUserProfile(userId, token),
+                ]);
+
+                setUser(userData);
+                setPosts(await fetchUserPosts(userId, token));
             } catch (err) {
                 console.error(err);
-                setErrorMsg("Failed to load feed.");
+                setErrorMsg('Failed to load dashboard.');
             }
         };
-        loadFeed();
-    }, []);
+
+        load();
+    }, [navigate]);
+
 
     const handleLogout = async () => {
         try {

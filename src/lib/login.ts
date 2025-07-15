@@ -1,13 +1,13 @@
-export type LoginFormInput = {
-    email: string;
-    password: string;
-};
+import { API_ENDPOINTS } from "../constants/env";
+import { LoginFormInput, LoginResponse } from "../components/forms/login-form/LoginForm.types";
+import axios from "axios";
 
-export async function loginUser(data: LoginFormInput) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log('📦 Mock login succeeded user:', data);
-            resolve({ message: 'Mock login success' });
-        }, 1000);
-    });
+
+export async function loginUser(data: LoginFormInput): Promise<LoginResponse> {
+    const res = await axios.post<LoginResponse>(API_ENDPOINTS.users.login, data);
+
+    localStorage.setItem('userId', res.data.data.user.id.toString());
+    localStorage.setItem('auth_token', res.data.data.user.token || '');
+
+    return res.data;
 }
