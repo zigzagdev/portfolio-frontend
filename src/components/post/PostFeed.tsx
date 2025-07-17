@@ -6,7 +6,7 @@ type PostFeedProps = {
     posts: Post[];
 };
 
-const PostFeed: React.FC<PostFeedProps> = ({ posts }) => {
+const PostFeed: React.FC<PostFeedProps> = ({ posts = [] }) => {
     if (posts.length === 0) {
         return (
             <p className="text-center text-gray-500 py-8">
@@ -17,14 +17,12 @@ const PostFeed: React.FC<PostFeedProps> = ({ posts }) => {
 
     return (
         <div className="space-y-4">
-            {posts.map((post) => (
+            {posts?.map((post) => (
                 <PostCard
                     key={post.id}
                     content={post.content}
-                    authorName={post.authorName}
+                    firstName={post.firstName}
                     createdAt={post.createdAt}
-                    likesCount={post.likesCount ?? 0}
-                    isLiked={post.isLiked ?? false}
                 />
             ))}
         </div>
