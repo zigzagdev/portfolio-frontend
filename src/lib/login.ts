@@ -1,24 +1,13 @@
-import { API_URL } from '../constants/env';
+import { API_ENDPOINTS } from "../constants/env";
+import { LoginFormInput, LoginResponse } from "../components/forms/login-form/LoginForm.types";
+import axios from "axios";
 
-export type LoginFormInput = {
-    email: string;
-    password: string;
-};
 
-export async function loginUser(data: LoginFormInput): Promise<{ message: string }> {
-    const res = await fetch(`${API_URL}/api/users/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
+export async function loginUser(data: LoginFormInput): Promise<LoginResponse> {
+    const res = await axios.post<LoginResponse>(API_ENDPOINTS.auth.login, data);
 
-    if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || `Login failed: ${res.status}`);
-    }
+    localStorage.setItem('userId', res.data.data.user.id.toString());
+    localStorage.setItem('auth_token', res.data.data.user.token || '');
 
-    const result = await res.json();
-    return result;
+    return res.data;
 }
