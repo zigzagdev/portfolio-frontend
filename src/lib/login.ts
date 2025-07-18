@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 export async function loginUser(data: LoginFormInput): Promise<LoginResponse> {
-    const res = await axios.post<LoginResponse>(API_ENDPOINTS.users.login, data);
+    const res = await axios.post<LoginResponse>(API_ENDPOINTS.auth.login, data);
 
     localStorage.setItem('userId', res.data.data.user.id.toString());
     localStorage.setItem('auth_token', res.data.data.user.token || '');
