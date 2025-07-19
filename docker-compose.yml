@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: vite-react-app
     ports:
-      - "6673:5173"
+      - "6673:5174"
     volumes:
       - .:/app
       - /app/node_modules
