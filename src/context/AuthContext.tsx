@@ -8,7 +8,7 @@ import {
     SetStateAction,
 } from 'react';
 import { logoutUser } from '../lib/logout';
-import { User } from '../lib/user';
+import { User, fetchUserProfile } from '../lib/user';
 
 type AuthContextType = {
     user: User | null;
@@ -25,33 +25,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const checkAuth = async () => {
-            try {
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
 
-                const isMock = 'true';
-
-                if (isMock) {
-                    const mockUser = {
-                        id: 1,
-                        firstName: 'Mock',
-                        lastName: 'User',
-                        email: 'mock@example.com',
-                        bio: 'This is a mock bio.',
-                        location: 'Tokyo, Japan',
-                        skills: ['React', 'TypeScript', 'Tailwind'],
-                        profileImage: 'https://i.pravatar.cc/150?u=mock',
-                    };
-                    setUser(mockUser);
-                } else {
-                    const res = await fetch('/api/me');
-                    if (res.ok) {
-                        const data = await res.json();
-                        setUser(data);
-                    } else {
-                        setUser(null);
-                    }
-                }
-            } catch (err) {
+            if (!token || !userId) {
                 setUser(null);
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const userProfile = await fetchUserProfile(userId, token);
+                setUser(userProfile);
+            } catch (error) {
+                console.error('Failed to fetch user profile:', error);
+                setUser(null);
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
             } finally {
                 setLoading(false);
             }
@@ -62,11 +52,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const logout = async () => {
         try {
-            await logoutUser();
+            await logoutUser(); // 通常のAPI logout
+        } catch (err) {
+            console.warn('Logout failed (ignored):', err);
+        } finally {
             setUser(null);
             localStorage.removeItem('token');
-        } catch (err) {
-            alert(err);
+            localStorage.removeItem('userId');
         }
     };
 
